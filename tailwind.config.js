@@ -7,6 +7,8 @@ module.exports = {
     
     "*.{html,js}",
 
+    "**/*.{html,js}",
+
     "./componentes/*.{html,js}"
   
   ],
