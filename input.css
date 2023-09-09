@@ -7,6 +7,12 @@
   transition: all 0.2s linear;
   outline: none;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  
+  }
+
+  *::selection {
+    background-color: #4438ca74; /* Cor de fundo ao selecionar texto */
+  
   }
 
 

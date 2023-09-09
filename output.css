@@ -2714,6 +2714,16 @@ video {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+*::-moz-selection {
+  background-color: #4438ca74;
+  /* Cor de fundo ao selecionar texto */
+}
+
+*::selection {
+  background-color: #4438ca74;
+  /* Cor de fundo ao selecionar texto */
+}
+
 .peer:checked ~ .peer-checked\:bg-dark {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
   --tw-gradient-from: #374151 var(--tw-gradient-from-position);
