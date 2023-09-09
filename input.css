@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+  transition: all 0.2s linear;
+  outline: none;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+
+@layer components {
+
+  /* Cores fundo */
+
+  .bg-light {
+
+    @apply 
+    gradient-to-r from-slate-50 to-white;
+  }
+
+  .bg-dark {
+
+    @apply 
+      bg-gradient-to-r from-gray-700 to-gray-800;
+  }
+
+
+
+
+
+}
