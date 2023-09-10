@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="pt-br" class="smooth">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>📦 Controle de estoque</title>
+
+    <script>document.querySelector('html').style.display="none";</script>
+  
+    <script type="module" src="index.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <link rel="stylesheet" href="output.css">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+</head>
+
+<body class=" bg-white dark:bg-dark">
+
+  <!-- HEADER -->
+
+    
+    <header class="  bg-white dark:bg-dark px-4 py-6 drop-shadow-md flex justify-between z-20 relative">
+
+        <a class="flex gap-4 " href="index.html">
+
+        <img class="w-6 sm:w-8" src="https://ouch-cdn2.icons8.com/YjPrj9uG0t5rlAYH87OZhatg56bfDk2HYabBvJcfRWA/rs:fit:368:383/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvMTky/L2I2YjBlM2U3LTk2/MDktNGI3Ny05M2Y3/LWE1OWMxMzcwNjJl/OC5wbmc.png" alt="">
+
+        <h1 class="text-xl text-gray-500 sm:text-2xl hover:text-indigo-600 dark:text-gray-200">Estoque Fácil</h1>
+
+        </a>
+
+        <label for="AcceptConditions" class="relative h-6 w-12 cursor-pointer">
+
+        <input type="checkbox" id="AcceptConditions" class="peer sr-only" />
+
+        <span
+            class="absolute inset-0 rounded-full bg-white/90 outline outline-gray-100 outline-2 transition peer-checked:bg-dark"
+        ></span>
+
+        <span
+            class="absolute inset-y-0 start-0 m-1 h-4 w-4 rounded-full dark:bg-primary bg-primary/40  transition-all peer-checked:start-6"
+        ></span>
+
+        </label>
+
+    </header>
+
+
+
+    <!--------------------------------------------------->
+
+    <!-- Login -->
+
+
+<section class="relative flex flex-wrap h-screen lg:items-center p-4 dark:bg-dark">
+
+  <!-- alert -->
+
+  <div
+  id="objalert"
+  role="alert"
+  class="hidden absolute z-10 top-4 w-[95%] drop-shadow-md rounded-xl border border-gray-100 bg-green-50 p-4 dark:border-gray-800 dark:bg-gray-700"
+>
+  <div class="flex items-start gap-4">
+    <span class="text-green-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-6 w-6"
+      >
+        <path id="icon-success" class=""
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+
+        <path id="icon-alert" class="" stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+
+      </svg>
+    </span>
+
+    <div   class="flex-1">
+
+      <strong id="titulo-alerta" class="block font-medium text-green-600 ">
+        Login Efetuado
+      </strong>
+
+      <p id="mensagem-alerta" class="mt-1 text-sm text-gray-700 dark:text-gray-200">
+        Dados preenchidos com sucesso!
+      </p>
+    </div>
+
+    <button
+      class="text-gray-500 transition hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-500"
+    >
+      <span class="sr-only">Dismiss popup</span>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-6 w-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+
+  <!------------------------------------>
+
+
+    <img 
+      data-aos="fade-right" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="100"
+      alt="login"
+      src="https://ouch-cdn2.icons8.com/JYiTsw6K6zsc1F9Sg6_PXiB3Mqr_xJAuoKTEy2pwQ-g/rs:fit:368:435/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvOTc4/LzY0OWQ3MzY3LWVk/ZDktNDM0MC04MGNk/LTAyZTFiMTM2MWVi/My5wbmc.png"
+      class="w-1/5 max-sm:w-1/2 max-md:1/3 max-lg:w-1/4 mx-auto "
+    />
+
+
+
+  <div
+  data-aos="fade-left" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="500" 
+  class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24 mx-auto ">
+
+    <div class="mx-auto max-w-lg text-center">
+
+      <h1 class="text-2xl font-bold sm:text-3xl text-primary">Entre na sua conta</h1>
+
+      <p class="mt-4 text-gray-500 dark:text-gray-400">
+        Preencha o email e senha para entrar na sua conta
+      </p>
+
+    </div>
+
+    <form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+
+      <div>
+
+        <label for="email" class="sr-only">Email</label>
+
+        <div class="relative group/inputemail ">
+          <input
+            id="txt-email-login"
+            type="email"
+            class="w-full rounded-lg border-gray-200 text-primary/70 dark:text-white  p-4 pe-12 text-sm shadow-sm focus:outline focus:outline-2 focus:outline-primary/40 dark:focus:outline-primary/80 focus:scale-[1.02] focus:shadow dark:bg-gray-600"
+            placeholder="Email"
+          />
+
+          <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+              />
+            </svg>
+
+          </span>
+
+        </div>
+
+      </div>
+
+      <div>
+
+        <label for="password" class="sr-only">Password</label>
+
+        <div class="relative">
+          <input
+          id="txt-senha-login"
+            type="password"
+            class="w-full rounded-lg border-gray-200 text-primary/70 dark:text-white p-4 pe-12 text-sm shadow-sm focus:outline focus:outline-2 focus:outline-primary/40 dark:focus:outline-primary/80 focus:scale-[1.02] focus:shadow dark:bg-gray-600"
+            placeholder="Senha"
+          />
+
+          <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              />
+
+              <path class="hidden" stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-10 justify-between">
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          <a class="underline hover:text-primary " href="#">Esqueci minha senha</a>
+        </p>
+
+        <button
+          type="submit"
+          class="inline-block w-full rounded-lg bg-primary hover:bg-primary/80 hover:scale-105 hover:drop-shadow-md px-5 py-3 text-sm font-medium text-white"
+        >
+          Entrar
+        </button>
+
+        <p class="text-sm text-gray-500 text-center">
+          Ainda não tem uma conta?
+          <a class="underline hover:text-primary" href="#">Cadastrar</a>
+        </p>
+
+      </div>
+    </form>
+  </div>
+
+
+
+</section>
+
+
+
+  
+    <!--------------------------------------------------->
+  
+
+    
+  
+  
+  
+    
+</body>
+
+</html>

@@ -4,6 +4,7 @@
 
  
 import * as funcoes from "./funcoes/f_darkmode.js";
+import * as f_alerta from "./funcoes/f_alerta_campo.js";
 
 
 // ------------------------------------------------------------------------
@@ -35,12 +36,22 @@ if (localStorage.getItem('darkMode') === 'true') {
     elementos.toggle.checked  = false;
 }
 
+// ------------------------------------------------------------------------
+
+// Mostrar elementos na tela
+
 document.querySelector('html').style.display="block";
+
+// ------------------------------------------------------------------------
+
+// Efeitos de animacao
 
 AOS.init();
 
 // ------------------------------------------------------------------------
 
+
+//f_alerta.alerta_campo("Login Efetuado com sucesso","Os dados estao certos","bg-green-200",undefined)
 
 
 
