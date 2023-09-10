@@ -1,22 +1,48 @@
 
 // colocar o efeito darkmode na pagina
 
-export function efeitoDarkmode(){
+
+export function efeitoDarkmode() {
 
     const html = document.querySelector('html');
 
-    if (html.classList.contains("dark")) {
+    const varDarkmode = html.classList.contains('dark'); // Obtém o estado atual do dark mode
 
-        html.classList.remove("dark");
+    if (varDarkmode) {
+
+        html.classList.remove('dark'); // Desativa o dark mode
+
+        localStorage.setItem('darkMode', 'false'); // Atualiza o estado no localStorage
+        
+    } else {
+
+        html.classList.add('dark'); // Ativa o dark mode
+
+        localStorage.setItem('darkMode', 'true'); // Atualiza o estado no localStorage
+    }
+}
+
+;
+
+
+    if (localStorage.getItem('darkMode') === 'true') {
+
+        document.querySelector('html').classList.add('dark');
+
 
     } else {
 
-        html.classList.add("dark");
+        document.querySelector('html').classList.remove('dark');
 
     }
 
 
-}
+;
+
+
+
+
+// ------------------------------------------------------------------------
 
 
 

@@ -2716,12 +2716,10 @@ video {
 
 *::-moz-selection {
   background-color: #4438ca74;
-  /* Cor de fundo ao selecionar texto */
 }
 
 *::selection {
   background-color: #4438ca74;
-  /* Cor de fundo ao selecionar texto */
 }
 
 .peer:checked ~ .peer-checked\:bg-dark {
