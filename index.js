@@ -4,7 +4,7 @@
 
  
 import * as funcoes from "./funcoes/f_darkmode.js";
-import * as f_alerta from "./funcoes/f_alerta_campo.js";
+
 
 
 // ------------------------------------------------------------------------
@@ -13,7 +13,7 @@ import * as f_alerta from "./funcoes/f_alerta_campo.js";
 // importando variaveis
 
 
-import * as elementos from "./variaveis/elementos.js";
+import * as elementos from "./variaveis/v_elementos.js";
 
 
 
@@ -51,7 +51,7 @@ AOS.init();
 // ------------------------------------------------------------------------
 
 
-//f_alerta.alerta_campo("Login Efetuado com sucesso","Os dados estao certos","bg-green-200",undefined)
+
 
 
 
