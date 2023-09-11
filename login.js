@@ -6,6 +6,8 @@ import * as variaveis_login from './variaveis/v_login.js';
 
 import * as funcao_alerta_campo from './funcoes/f_alerta_campo.js';
 
+import * as funcao_autenticacao from './funcoes/f_autenticacao.js';
+
 
 const olhoaberto = document.getElementById('olhoaberto');
 
@@ -26,10 +28,14 @@ olhofechado.addEventListener('click',()=>{ funcao_login.visibilidadeSenhafechado
 
 btnEntrar.addEventListener('click',()=>{
 
-    let v_result = funcao_login.validarEmail(campoEmail);
+    let v_result = false;
 
-    if(v_result){funcao_login.validarSenha(campoSenha);}
-    
+    v_result = funcao_login.validarEmail(campoEmail);
+
+    if(v_result){v_result = funcao_login.validarSenha(campoSenha);}
+
+    if(v_result){ funcao_autenticacao.validarEntradaSistema( campoEmail ,campoSenha) }
+
     
 
 })

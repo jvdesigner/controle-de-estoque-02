@@ -61,9 +61,11 @@ export function validarEmail(campoEmail){
 
 export function validarSenha(campoSenha){
 
-
+    let v_result = true
 
         if( !variaveis_login.senhaRegex.test(campoSenha.value) ){
+
+            v_result = false;
 
             funcaoalerta.alerta_campo("Atenção","Sua senha deve conter no minimo 6 caracteres com letras e numeros","bg-red-200",campoSenha);
 
@@ -72,7 +74,7 @@ export function validarSenha(campoSenha){
         }
 
     
-
+        return v_result;
 
 }
 

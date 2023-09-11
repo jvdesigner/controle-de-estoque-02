@@ -45,6 +45,10 @@ export function alerta_campo(v_titulo,v_mensagem,v_cor,obj_campo){
 
     }else{ 
 
+        tituloalerta.classList.remove('text-red-500');
+
+        tituloalerta.classList.add('text-green-500');
+
         iconalert.classList.add('hidden');
         
         iconsucess.classList.remove('hidden');
