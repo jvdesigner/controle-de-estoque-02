@@ -78,6 +78,27 @@ export function validarSenha(campoSenha){
 
 }
 
+// Senha igual a confirmada
+
+export function validarSenhaConfirmada(campoSenha,campoConfirmada){
+
+    let v_result = true
+
+        if( campoSenha.value !== campoConfirmada.value ){
+
+            v_result = false;
+
+            funcaoalerta.alerta_campo("Atenção","A senha confirmada está diferente da senha","bg-red-200",campoConfirmada);
+
+        
+
+        }
+
+    
+        return v_result;
+
+}
+
 
 
 

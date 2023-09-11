@@ -13,7 +13,28 @@ export function validarEntradaSistema(email,password){
 
         alerta.alerta_campo("Dados válidos","Usuário encontrado","bg-green-200",undefined);
 
-        //const user = userCredential.user;
+        autenticacao.onAuthState(autenticacao.auth, (user) => {
+            if (user) {
+             
+                const displayName = user.displayName;
+                const email = user.email;
+                const photoURL = user.photoURL;
+                const emailVerified = user.emailVerified;
+    
+                console.log('Nome:'+displayName);
+                console.log('Email:'+email);
+                console.log('Foto:'+photoURL);
+                console.log('Verificado:'+emailVerified);
+
+                if(!emailVerified){
+                    
+                    autenticacao.sendEmail(user).then(() => {
+                        window.location.href = "verificarEmail.html";
+                      });;
+                };
+              
+            }
+          });
         
     })
 
@@ -48,3 +69,120 @@ export function validarEntradaSistema(email,password){
 
 
 }
+;
+
+
+
+export function validarGoogle(){
+
+    
+   autenticacao.signInPopup(autenticacao.auth, autenticacao.provider)
+  .then((result) => {
+
+
+    alerta.alerta_campo("Dados válidos","Usuário encontrado","bg-green-200",undefined);
+
+    autenticacao.onAuthState(autenticacao.auth, (user) => {
+        if (user) {
+         
+            const displayName = user.displayName;
+            const email = user.email;
+            const photoURL = user.photoURL;
+            const emailVerified = user.emailVerified;
+
+            console.log('Nome:'+displayName);
+            console.log('Email:'+email);
+            console.log('Foto:'+photoURL);
+            console.log('Verificado:'+emailVerified);
+          
+        }
+      });
+
+
+
+  }).catch((error) => {
+
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    if(errorMessage!=="Firebase: Error (auth/popup-closed-by-user)."){
+
+        alerta.alerta_campo("Erro de autenticação",errorMessage,"bg-red-200",undefined);
+
+        console.log(errorMessage)
+
+    }
+
+  });
+
+
+
+
+};
+
+
+
+export function CriarConta(email,password){
+
+    autenticacao.createUser(autenticacao.auth, email.value, password.value)
+
+    .then((userCredential) => {
+
+        alerta.alerta_campo("Conta Criada","Conta criada com sucesso","bg-green-200",undefined);
+
+        autenticacao.onAuthState(autenticacao.auth, (user) => {
+            if (user) {
+             
+                const displayName = user.displayName;
+                const email = user.email;
+                const photoURL = user.photoURL;
+                const emailVerified = user.emailVerified;
+    
+                console.log('Nome:'+displayName);
+                console.log('Email:'+email);
+                console.log('Foto:'+photoURL);
+                console.log('Verificado:'+emailVerified);
+
+                if(!emailVerified){
+                    
+                    autenticacao.sendEmail(user).then(() => {
+                        window.location.href = "verificarEmail.html";
+                      });;
+                };
+              
+            }
+          });
+        
+    })
+
+    .catch((error) => {
+
+        const errorCode = error.code;
+
+        const errorMessage = error.message;
+
+        switch (errorMessage) {
+
+            case 'Firebase: Error (auth/email-already-in-use).':
+
+                alerta.alerta_campo("Esse usuário já existe","Verifique o email preenchido","bg-red-200",email);
+
+                break;
+          
+            
+          
+            default:
+
+                alerta.alerta_campo("Erro de autenticação",errorMessage,"bg-red-200",undefined);
+
+                console.log(errorMessage)
+              
+          }
+          
+
+    });
+
+
+}
+;
+

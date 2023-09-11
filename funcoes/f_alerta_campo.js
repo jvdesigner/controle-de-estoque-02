@@ -36,10 +36,16 @@ export function alerta_campo(v_titulo,v_mensagem,v_cor,obj_campo){
 
         iconalert.classList.add('text-red-500');
 
-        obj_campo.classList.add('outline-none');
-        obj_campo.classList.add('outline-red-200');
+        if(obj_campo){
 
-        obj_campo.addEventListener('click',()=>{obj_campo.classList.remove('outline-red-200');})
+            obj_campo.classList.add('outline-none');
+            obj_campo.classList.add('outline-red-200');
+    
+            obj_campo.addEventListener('click',()=>{obj_campo.classList.remove('outline-red-200');})
+
+        }
+
+       
 
     
 

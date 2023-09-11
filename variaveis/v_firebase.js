@@ -6,7 +6,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebas
 import { 
 
     getAuth, 
-    signInWithEmailAndPassword 
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    createUserWithEmailAndPassword ,
+    onAuthStateChanged,
+    sendEmailVerification
 
 } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
 
@@ -28,3 +33,46 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 export const signIn = signInWithEmailAndPassword;
+
+export const provider = new GoogleAuthProvider();
+
+export const signInPopup = signInWithPopup;
+
+export const createUser =  createUserWithEmailAndPassword; 
+
+export const onAuthState =  onAuthStateChanged; 
+
+export const sendEmail =  sendEmailVerification;
+
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+   
+      alert('usuario conectado');
+
+        if (user) {
+         
+            const displayName = user.displayName;
+            const email = user.email;
+            const photoURL = user.photoURL;
+            const emailVerified = user.emailVerified;
+
+            console.log('Nome:'+displayName);
+            console.log('Email:'+email);
+            console.log('Foto:'+photoURL);
+            console.log('Verificado:'+emailVerified);
+          
+        }
+      
+    
+  } else {
+    alert('usuario nao conectado')
+  }
+});
+
+
+
+
+
+
+
