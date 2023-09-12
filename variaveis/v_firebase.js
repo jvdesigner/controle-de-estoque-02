@@ -75,20 +75,23 @@ export const sairConta =  signOut;
             console.log('Email:'+email);
             console.log('Foto:'+photoURL);
             console.log('Verificado:'+emailVerified);
+
+            const pathname = window.location.pathname;
+            const parts = pathname.split('/'); // Divide o caminho em partes separadas por "/"
+            const nomeDoArquivo = parts[parts.length - 1]; // Obtém a última parte, que é o nome do arquivo
   
-            if (window.location.pathname === '/login.html') {
+            if (nomeDoArquivo == 'login.html') {
            
               if(emailVerified){window.location.href = "home.html"}
-          }
-          
-          if (window.location.pathname === '/login.html') {
-            if(!emailVerified){
-                      
-              sendEmailVerification(user).then(() => {
+              else{
+                sendEmailVerification(user).then(() => {
                   window.location.href = "verificarEmail.html";
                   
                 });;
-        }}
+              }
+          }
+          
+
 
 
   
