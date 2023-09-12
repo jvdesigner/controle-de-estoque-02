@@ -1,17 +1,22 @@
 
 
 import * as autenticacao from '../variaveis/v_firebase.js';
+import { emailRegex } from '../variaveis/v_login.js';
 
 import * as alerta from './f_alerta_campo.js';
 
 
 export function validarEntradaSistema(email,password){
 
+ 
+
     autenticacao.signIn(autenticacao.auth, email.value, password.value)
 
     .then((userCredential) => {
 
-        alerta.alerta_campo("Dados válidos","Usuário encontrado","bg-green-200",undefined);
+        //alerta.alerta_campo("Dados válidos","Usuário encontrado","bg-green-200",undefined);
+
+        
 
         autenticacao.onAuthState(autenticacao.auth, (user) => {
             if (user) {
@@ -30,11 +35,13 @@ export function validarEntradaSistema(email,password){
                     
                     autenticacao.sendEmail(user).then(() => {
                         window.location.href = "verificarEmail.html";
+                        
                       });;
                 };
               
             }
           });
+        
         
     })
 
@@ -67,7 +74,6 @@ export function validarEntradaSistema(email,password){
 
     });
 
-
 }
 ;
 
@@ -80,7 +86,7 @@ export function validarGoogle(){
   .then((result) => {
 
 
-    alerta.alerta_campo("Dados válidos","Usuário encontrado","bg-green-200",undefined);
+    //alerta.alerta_campo("Dados válidos","Usuário encontrado","bg-green-200",undefined);
 
     autenticacao.onAuthState(autenticacao.auth, (user) => {
         if (user) {
@@ -226,4 +232,29 @@ export function enviarrecuperacaosenha(email){
 
 
 
-}
+};
+
+
+export function sairConta(){
+
+    autenticacao.sairConta(autenticacao.auth).then(() => {
+
+        window.location.href = "login.html";
+
+        
+      }).catch((error) => {
+
+        alerta.alerta_campo("Erro","Falha ao sair da conta","bg-red-200",undefined);
+        
+        console.log(error.message)
+
+      });
+
+
+
+
+
+};
+
+
+

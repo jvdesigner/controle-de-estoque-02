@@ -12,9 +12,13 @@ import {
     createUserWithEmailAndPassword ,
     onAuthStateChanged,
     sendEmailVerification,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    signOut
 
 } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+
+
+import * as autenticacao from '../funcoes/f_autenticacao.js'
 
 
 
@@ -47,31 +51,60 @@ export const sendEmail =  sendEmailVerification;
 
 export const sendEmailPassword =  sendPasswordResetEmail;
 
+export const sairConta =  signOut;
 
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-   
-//       alert('usuario conectado');
 
-//         if (user) {
-         
-//             const displayName = user.displayName;
-//             const email = user.email;
-//             const photoURL = user.photoURL;
-//             const emailVerified = user.emailVerified;
 
-//             console.log('Nome:'+displayName);
-//             console.log('Email:'+email);
-//             console.log('Foto:'+photoURL);
-//             console.log('Verificado:'+emailVerified);
-          
-//         }
-      
+
+
+
+  onAuthStateChanged(auth, (user) => {
+
     
-//   } else {
-//     alert('usuario nao conectado')
-//   }
-// });
+
+    if (user) {
+  
+            //alert('usuario conectado')
+        
+            const displayName = user.displayName;
+            const email = user.email;
+            const photoURL = user.photoURL;
+            const emailVerified = user.emailVerified;
+  
+            console.log('Nome:'+displayName);
+            console.log('Email:'+email);
+            console.log('Foto:'+photoURL);
+            console.log('Verificado:'+emailVerified);
+  
+            if (window.location.pathname === '/login.html') {
+           
+              if(emailVerified){window.location.href = "home.html"}
+          }
+          
+          if (window.location.pathname === '/login.html') {
+            if(!emailVerified){
+                      
+              sendEmailVerification(user).then(() => {
+                  window.location.href = "verificarEmail.html";
+                  
+                });;
+        }}
+
+
+  
+    } else {
+  
+        
+  
+    };
+  
+  
+  });
+  
+
+
+
+
 
 
 
