@@ -23,6 +23,7 @@ import * as elementos from "./variaveis/v_elementos.js";
 // Efeito DarkMode
 
 
+
 elementos.toggle.addEventListener('change',()=>funcoes.efeitoDarkmode());
 
 if (localStorage.getItem('darkMode') === 'true') {

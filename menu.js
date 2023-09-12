@@ -12,8 +12,11 @@ const dark = document.getElementById('divdark');
 
 const fotoMenuUsuairo = document.getElementById('fotoMenuUsuairo');
 const fotoMenuUsuairo2 = document.getElementById('fotoMenuUsuairo2');
+const fotoMenuUsuairo3 = document.getElementById('fotoMenuUsuairo3');
 const nomeMenuUsuairo = document.getElementById('nomeMenuUsuairo');
+const nomeMenuUsuairo3 = document.getElementById('nomeMenuUsuairo3');
 const emailMenuUsuairo = document.getElementById('emailMenuUsuairo');
+const emailMenuUsuairo3 = document.getElementById('emailMenuUsuairo3');
 
 
 
@@ -63,6 +66,12 @@ firebase.onAuthState(firebase.auth, (user) => {
             if(photoURL){fotoMenuUsuairo.src = photoURL;fotoMenuUsuairo2.src = photoURL};
             if(displayName){nomeMenuUsuairo.innerHTML=displayName};
             if(email){emailMenuUsuairo.innerHTML=email};
+
+            
+            if(fotoMenuUsuairo3){fotoMenuUsuairo3.src = photoURL}
+            if(displayName&&nomeMenuUsuairo3){nomeMenuUsuairo3.innerHTML=displayName};
+            if(email&&emailMenuUsuairo3){emailMenuUsuairo3.innerHTML=email};
+            
           
   
     };
