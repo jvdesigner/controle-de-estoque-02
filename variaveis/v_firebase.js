@@ -11,7 +11,8 @@ import {
     signInWithPopup,
     createUserWithEmailAndPassword ,
     onAuthStateChanged,
-    sendEmailVerification
+    sendEmailVerification,
+    sendPasswordResetEmail
 
 } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
 
@@ -44,31 +45,33 @@ export const onAuthState =  onAuthStateChanged;
 
 export const sendEmail =  sendEmailVerification;
 
+export const sendEmailPassword =  sendPasswordResetEmail;
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
+
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
    
-      alert('usuario conectado');
+//       alert('usuario conectado');
 
-        if (user) {
+//         if (user) {
          
-            const displayName = user.displayName;
-            const email = user.email;
-            const photoURL = user.photoURL;
-            const emailVerified = user.emailVerified;
+//             const displayName = user.displayName;
+//             const email = user.email;
+//             const photoURL = user.photoURL;
+//             const emailVerified = user.emailVerified;
 
-            console.log('Nome:'+displayName);
-            console.log('Email:'+email);
-            console.log('Foto:'+photoURL);
-            console.log('Verificado:'+emailVerified);
+//             console.log('Nome:'+displayName);
+//             console.log('Email:'+email);
+//             console.log('Foto:'+photoURL);
+//             console.log('Verificado:'+emailVerified);
           
-        }
+//         }
       
     
-  } else {
-    alert('usuario nao conectado')
-  }
-});
+//   } else {
+//     alert('usuario nao conectado')
+//   }
+// });
 
 
 

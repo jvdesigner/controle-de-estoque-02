@@ -186,3 +186,44 @@ export function CriarConta(email,password){
 }
 ;
 
+
+export function enviarrecuperacaosenha(email){
+
+    autenticacao.sendEmailPassword(autenticacao.auth, email.value)
+  .then(() => {
+
+    alerta.alerta_campo("Verifique seu email","Um link foi enviado para seu email para redefinir sua senha","bg-green-200",undefined);
+
+    setTimeout(()=>window.location.href = "login.html",3000);
+    
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    switch (errorMessage) {
+
+        case 'Firebase: Error (auth/user-not-found).':
+
+            alerta.alerta_campo("Email não cadastrado","Verifique o email preenchido","bg-red-200",email);
+
+            break;
+      
+        
+      
+        default:
+
+            alerta.alerta_campo("Erro de autenticação",errorMessage,"bg-red-200",undefined);
+
+            console.log(errorMessage)
+          
+      }
+
+    console.log(errorMessage);
+    
+  });
+
+
+
+
+}

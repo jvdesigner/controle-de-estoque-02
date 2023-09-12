@@ -29,16 +29,32 @@ const btncadastrar = document.getElementById('btncadastrar');
 
 const btngoogle = document.getElementById('btngoogle');
 
+const btnrecuperarsenha = document.getElementById('btnrecuperarsenha');
 
 
+if(olhoaberto){olhoaberto.addEventListener('click',()=>{ funcao_login.visibilidadeSenhaaberto(olhoaberto,olhofechado,campoSenha) })};
 
-olhoaberto.addEventListener('click',()=>{ funcao_login.visibilidadeSenhaaberto(olhoaberto,olhofechado,campoSenha) })
-
-olhofechado.addEventListener('click',()=>{ funcao_login.visibilidadeSenhafechado(olhoaberto,olhofechado,campoSenha) })
+if(olhofechado){olhofechado.addEventListener('click',()=>{ funcao_login.visibilidadeSenhafechado(olhoaberto,olhofechado,campoSenha) })}
 
 if( olhoaberto2 ){ olhoaberto2.addEventListener('click',()=>{ funcao_login.visibilidadeSenhaaberto(olhoaberto2,olhofechado2,campoSenha2) }) }
 
 if( olhofechado2 ){ olhofechado2.addEventListener('click',()=>{ funcao_login.visibilidadeSenhafechado(olhoaberto2,olhofechado2,campoSenha2) }) }
+
+
+
+if(btnrecuperarsenha){
+
+    btnrecuperarsenha.addEventListener('click',()=>{
+
+        if(funcao_login.validarEmail(campoEmail)){
+
+            funcao_autenticacao.enviarrecuperacaosenha(campoEmail);
+
+        }
+
+    })
+
+};
 
 
 
