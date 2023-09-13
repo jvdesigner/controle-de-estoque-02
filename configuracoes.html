@@ -15,18 +15,44 @@
 
     <script type="module" src="menu.js"></script>
 
+    <script type="module" src="configuracoes.js"></script>
+
     <link rel="stylesheet" href="output.css">
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    
+
+
+
 
 </head>
 
+<!-- loading -->
+
+<div id="loading" class="hidden items-center justify-center absolute bg-white/60 dark:bg-dar/60 h-full w-full z-10">
+
+    
+  <div role="status">
+      <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-primary" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+      </svg>
+      <span class="sr-only">Loading...</span>
+  </div>
+  
+    
+    </div>
+
+
+
 <body class=" bg-white dark:bg-dark">
 
-  <main class="bg-white dark:bg-dark relative overflow-hidden">
+
+
+  <main class="bg-white dark:bg-dark relative">
 
     <header class="hidden fixed max-lg:flex z-20 justify-between  w-full drop-shadow-md bg-white dark:bg-dark py-4 px-2">
   
@@ -56,8 +82,12 @@
   
     
   <div class="flex h-screen group/menu overflow-hidden flex-col justify-between shadow-lg  bg-white dark:bg-dark w-24 hover:w-1/4 max-lg:hidden fixed left-0 z-10 ">
+
+   
   
     <div class="px-4 py-6">
+
+      
   
       <div class="flex items-center justify-between ">
   
@@ -103,14 +133,14 @@
       <ul class="mt-6 space-y-2">
         <li>
           <a
-            href=""
-            class="flex items-center gap-6 rounded-lg bg-primary/50 px-4 py-2 group/inicio"
+            href="home.html"
+            class="flex items-center gap-6 rounded-lg  px-4 py-2 group/inicio text-gray-500 hover:bg-gray-100 hover:text-gray-700"
           >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ">
-          <path class="group-hover/inicio:stroke-primary stroke-white" stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+          <path class="group-hover/inicio:stroke-primary " stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
           </svg>
   
-           <p class="group-hover/menu:flex hidden text-white group-hover/inicio:text-primary">Início</p> 
+           <p class="group-hover/menu:flex hidden dark:text-gray-400 group-hover/inicio:text-primary">Início</p> 
           </a>
         </li>
   
@@ -288,7 +318,7 @@
   
               <li>
                 <a
-                  href="configuracoes.html"
+                  href="#"
                   class="flex items-center gap-6 rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 group/config"
                 ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover/config:stroke-primary dark:stroke-gray-400"><path stroke-linecap="round" class="" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path  stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
   
@@ -323,7 +353,7 @@
   
     <div class="sticky inset-x-0 bottom-0 border-t border-gray-100 group/perfil">
       
-      <a href="verPerfil.html" class="flex items-center gap-2 bg-white dark:bg-dark p-4 hover:bg-gray-50">
+      <a href="#" class="flex items-center gap-2 bg-white dark:bg-dark p-4 hover:bg-gray-50">
         <img
           id="fotoMenuUsuairo"
           alt="usuario"
@@ -341,16 +371,250 @@
       </a>
     </div>
   </div>
+
+   
+
+  <!----------------------- conteudo ---------------------------->
   
-  <div class="bg-white dark:bg-dark h-screen w-full  flex items-center top-36 relative text-primary text-4xl flex-col -translate-y-10 gap-10  z-0">
-      
-      <img class="w-1/6 max-lg:w-1/3" src="https://ouch-cdn2.icons8.com/5mJh012Xhk6LqO9cznMAg_VIlkpff3Hw5PQ-Ri6vuPM/rs:fit:368:404/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNjI4/LzUzN2ZhNTM2LTgz/Y2QtNDBmZC1iMjRi/LWEyMDFkNmVlOTVl/Yi5wbmc.png" alt="">
-       
-      Bem-vindo 👋
-      
-    
+  <div id="modalExcluirConta" class="hidden absolute top-0 bg-gray-700/60 h-screen w-full z-10 items-center justify-center max-sm:px-10">
+
+    <div class="rounded-lg bg-white p-8 shadow-2xl">
+      <h2 class="text-lg font-bold">Deseja realmente excluir sua conta?</h2>
+
+      <p class="mt-2 text-sm text-gray-500">
+        Atenção! Sua conta e seus dados serão deletados.
+      </p>
+
+      <div class="mt-4 flex gap-2">
+        <button
+          id="btnSimExcluir"
+          type="button"
+          class="rounded bg-red-50 px-4 py-2 text-sm font-medium text-red-600"
+        >
+          Sim, tenho certeza
+        </button>
+
+        <button
+        id="btnNaoExcluir"
+          type="button"
+          class="rounded bg-gray-50 px-4 py-2 text-sm font-medium text-gray-600"
+        >
+          Não, voltar
+        </button>
+</div>
+
+</div>
+
+
+  </div>
+
+
+  <div class="mx-auto max-w-screen-xl px-4 max-lg:pb-40 max-md:py-36 max-sm:pb-36 py-16 sm:px-6 lg:px-8 relative">
+
+      <!-- alert -->
+
+  <div
+  id="objalert"
+  role="alert"
+  class="hidden absolute z-10 top-4 w-[95%] drop-shadow-sm rounded-xl border border-gray-100 bg-green-50 p-4 dark:border-gray-800 dark:bg-gray-700"
+>
+  <div class="flex items-start gap-4">
+    <span class="text-green-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-6 w-6"
+      >
+        <path id="icon-success" class=""
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+
+        <path id="icon-alert" class="" stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+
+      </svg>
+    </span>
+
+    <div   class="flex-1">
+
+      <strong id="titulo-alerta" class="block font-medium text-green-600 ">
+        Login Efetuado
+      </strong>
+
+      <p id="mensagem-alerta" class="mt-1 text-sm text-gray-700 dark:text-gray-200">
+        Dados preenchidos com sucesso!
+      </p>
     </div>
+
+    
+
+  </div>
+</div>
+
+    <div class="mx-auto max-w-lg">
+      <h1 class="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
+        Alterar Senha ✍️
+      </h1>
   
+      <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
+        Altere sua senha no formulário abaixo
+      </p>
+  
+      <form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+
+  
+        <div>
+  
+          <label for="password" class="sr-only">Password</label>
+  
+          <div class="relative">
+            <input
+              autocomplete="off"
+              required
+              maxlength="20"
+              id="txt-senha-login"
+              type="password"
+              class="w-full rounded-lg border-gray-200 text-primary/70 dark:text-white p-4 pe-12 text-sm shadow-sm focus:outline focus:outline-2 focus:outline-primary/40 dark:focus:outline-primary/80 focus:scale-[1.02] focus:shadow dark:bg-gray-600"
+              placeholder="Senha"
+            />
+  
+            <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+        
+              <svg
+                id="olhoaberto"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 text-gray-400 hidden cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+              <path
+            
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                />
+              </svg>
+                
+              <svg
+              id="olhofechado"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 text-gray-400 cursor-pointer"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              >
+                <path  class="" stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+  
+              </svg>
+  
+            </span>
+          </div>
+        </div>
+  
+        <div>
+  
+          <label for="password" class="sr-only">Password</label>
+  
+          <div class="relative">
+            <input
+              autocomplete="off"
+              required
+              maxlength="20"
+              id="txt-senha-login2"
+              type="password"
+              class="w-full rounded-lg border-gray-200 text-primary/70 dark:text-white p-4 pe-12 text-sm shadow-sm focus:outline focus:outline-2 focus:outline-primary/40 dark:focus:outline-primary/80 focus:scale-[1.02] focus:shadow dark:bg-gray-600"
+              placeholder="Confirmar"
+            />
+  
+            <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+        
+              <svg
+                id="olhoaberto2"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 text-gray-400 hidden cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+              <path
+            
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                />
+              </svg>
+                
+              <svg
+              id="olhofechado2"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 text-gray-400 cursor-pointer"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              >
+                <path  class="" stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+  
+              </svg>
+  
+            </span>
+          </div>
+          
+        </div>
+  
+        <div class="flex flex-col gap-10 justify-between">
+          <p class="text-sm text-gray-500 dark:text-gray-400 hidden">
+            <a class="underline hover:text-primary " href="#">Esqueci minha senha</a>
+          </p>
+  
+          <button
+            id="btnsalvarsenha"
+            type="button"
+            class="inline-block w-full rounded-lg bg-primary hover:bg-primary/80 hover:scale-105 focus:scale-105 hover:drop-shadow-md px-5 py-3 text-sm font-medium text-white"
+          >
+            Salvar
+          </button>
+  
+          <button
+            id="btnexcluirconta"
+            type="button"
+            class="flex items-center justify-center mt-24 w-1/2 mx-auto rounded-lg bg-transparent outline outline-2 outline-red-300 hover:outline-red-400 hover:bg-red-500 hover:scale-105 focus:scale-105 hover:drop-shadow-md px-5 py-3 text-sm font-medium text-red-300 hover:text-white"
+          >
+            Excluir conta
+          </button>
+          
+        </div>
+
+      </form>
+
+      
+
+    </div>
+
+    
+
+  </div>
+
       <!--------------------------------------------------->
   
   
@@ -366,9 +630,10 @@
         <nav class="-mb-px flex items-center  w-full justify-around" aria-label="Tabs">
   
           <a
-            href="#"
+            href="home.html"
             class="flex flex-col shrink-0 items-center gap-2 border-b-2 border-primary px-1 pb-4 text-sm max-sm:text-xs font-medium text-primary dark:border-violet-500 dark:text-violet-500"
             aria-current="page"
+
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
