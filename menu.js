@@ -18,10 +18,28 @@ const nomeMenuUsuairo3 = document.getElementById('nomeMenuUsuairo3');
 const emailMenuUsuairo = document.getElementById('emailMenuUsuairo');
 const emailMenuUsuairo3 = document.getElementById('emailMenuUsuairo3');
 
-
+const modalperfil = document.getElementById('modalperfil');
 
 
 const btnSairConta = document.getElementById('btnSairConta');
+
+
+if(fotoMenuUsuairo2){
+
+    fotoMenuUsuairo2.addEventListener('click',()=>{
+
+        if(modalperfil){
+
+            if(modalperfil.style.display=="flex"){modalperfil.style.display="none"}
+            else{modalperfil.style.display="flex"}
+
+
+        }
+
+    })
+
+
+}
 
 
 light.addEventListener('click',()=>{
