@@ -1,5 +1,7 @@
 
 
+
+
 import * as autenticacao from '../variaveis/v_firebase.js';
 import { emailRegex } from '../variaveis/v_login.js';
 
@@ -255,6 +257,10 @@ export function sairConta(){
 
 
 };
+
+
+
+
 
 
 

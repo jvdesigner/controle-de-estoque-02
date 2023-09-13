@@ -68,7 +68,7 @@ firebase.onAuthState(firebase.auth, (user) => {
             if(email){emailMenuUsuairo.innerHTML=email};
 
             
-            if(fotoMenuUsuairo3){fotoMenuUsuairo3.src = photoURL}
+            if(fotoMenuUsuairo3&&photoURL){fotoMenuUsuairo3.src = photoURL}
             if(displayName&&nomeMenuUsuairo3){nomeMenuUsuairo3.innerHTML=displayName};
             if(email&&emailMenuUsuairo3){emailMenuUsuairo3.innerHTML=email};
             
