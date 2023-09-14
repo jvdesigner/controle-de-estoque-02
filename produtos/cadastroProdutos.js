@@ -161,6 +161,7 @@
                 categoria:vcategoria,
                 preco:parseFloat(vpreco),
                 custo:parseFloat(vcusto),
+                estoque:0,
                 descricao:vdescricao
 
                 });
