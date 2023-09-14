@@ -2320,10 +2320,6 @@ video {
      object-fit: scale-down;
 }
 
-.p-10 {
-  padding: 2.5rem;
-}
-
 .p-2 {
   padding: 0.5rem;
 }
@@ -3021,6 +3017,10 @@ video {
   outline-color: #fca5a5;
 }
 
+.outline-white {
+  outline-color: #fff;
+}
+
 .ring {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -3401,6 +3401,10 @@ video {
 
 .focus\:outline-primary\/40:focus {
   outline-color: rgb(67 56 202 / 0.4);
+}
+
+.focus\:outline-primary:focus {
+  outline-color: #4338ca;
 }
 
 .focus\:ring:focus {

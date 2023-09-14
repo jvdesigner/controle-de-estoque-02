@@ -63,6 +63,8 @@ export function alerta_campo(v_titulo,v_mensagem,v_cor,obj_campo){
 
     objalert.classList.remove('hidden');
 
+    window.scrollTo(0, 0);
+
     setTimeout(()=>objalert.classList.add('hidden'),3000);
 
 

@@ -14,7 +14,7 @@ export function verificarCamposVazios(formulario) {
 
       if (campo.value.trim() === '') {
 
-        funcaoalerta.alerta_campo("Atenção","Campo obrigatório","bg-red-200",campo);
+        funcaoalerta.alerta_campo("Atenção","Campos obrigatórios","bg-red-200",campo);
 
         resultado = false;
 

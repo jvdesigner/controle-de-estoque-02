@@ -1,6 +1,7 @@
+
 <!DOCTYPE html>
 
-<html lang="pt-br" class="smooth">
+<html lang="pt-br" class="smooth ">
 
 <head>
 
@@ -11,13 +12,13 @@
 
     <script>document.querySelector('html').style.display="none";</script>
   
-    <script type="module" src="index.js"></script>
+    <script type="module" src="../index.js"></script>
 
-    <script type="module" src="menu.js"></script>
+    <script type="module" src="../menu.js"></script>
 
-    <script src="editarPerfil.js" type="module"></script>
+    <script src="cadastroProdutos.js" type="module"></script>
 
-    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="../output.css">
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
@@ -48,7 +49,7 @@
 
 
 
-<body class=" bg-white dark:bg-dark">
+<body class=" bg-white dark:bg-dark ">
 
   <main class="bg-white dark:bg-dark relative">
 
@@ -409,7 +410,7 @@
   <!----------------------- conteudo ---------------------------->
   
 
-  <div class="mx-auto max-w-screen-xl px-4 max-lg:pb-40 max-md:py-36 max-sm:pb-36 py-16 sm:px-6 lg:px-8 relative">
+  <div class="mx-auto max-w-screen-xl px-4 max-lg:pb-40 max-md:py-36 max-sm:pb-36 py-16 sm:px-6 lg:px-8 relative ">
 
       <!-- alert -->
 
@@ -456,16 +457,17 @@
 </div>
 
     <div class="mx-auto max-w-lg">
+
       <h1 class="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
-        Editar Perfil ✍️
+        Cadastrar Produto 📦
       </h1>
   
       <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
-        Preencha o formulário para alterar suas informações
+        Preencha o formulário abaixo com as informações do seu produto
       </p>
   
       <form
-        id="formEditarPerfil"
+        id="formCadastrarProduto"
         action=""
         class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
       >
@@ -473,59 +475,86 @@
         <div class="flex flex-col gap-6">
           
           <div class=" ">
-            <label for="fotousuario" class="relative flex items-center justify-center cursor-pointer group/foto">
-            <img id="imgInput" class="w-1/3 mx-auto relative z-0 rounded-xl" src="https://media.istockphoto.com/id/1016744034/pt/vetorial/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=170667a&w=0&k=20&c=GmyDiEg3Mwxhyr9NvVcCcNdAKDzTliQ3PJDhWQalVoI=" alt="">
-            <div class="bg-primary/20 w-1/3 h-full rounded-xl absolute z-20 top-0 hidden group-hover/foto:flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-primary"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+
+            <label for="fotoProduto" class="relative flex items-center justify-center cursor-pointer group/foto">
+
+            <img id="imgInput" class="w-1/3 mx-auto relative z-0 rounded-xl" src="https://cdn.awsli.com.br/production/static/img/produto-sem-imagem.gif" alt="">
+
+            <div class="bg-primary/20 w-1/3 h-full rounded-xl absolute z-20 top-0 hidden group-hover/foto:flex items-center justify-center">
+
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-primary"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+
             </div>
             
-            <input type="file" class="hidden" id="fotousuario">
+            <input type="file" class="hidden" id="fotoProduto">
+
             </label>
+
           </div>
-  
-        
+
   
           <div class="relative">
+
             <input
-              id="inputPerfilEmail"
-              autocomplete="off"
-              maxlength="100"
-              type="email"
-              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 outline-primary focus:scale-105"
-              placeholder="Email"
-            />
-  
-            <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                />
-              </svg>
-            </span>
-            
-          </div>
-  
-          <div class="relative">
-            <input
-              id="inputPerfilNome"
+              id="inputNomeProduto"
               autocomplete="off"
               maxlength="200"
               type="text"
-              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 outline-primary focus:scale-105"
-              placeholder="Nome completo"/>
+              class="w-full rounded-lg  border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Nome"/>
+  
+          </div>
+
+          <div class="relative">
+
+            <input
+              id="inputCategoriaProduto"
+              autocomplete="off"
+              maxlength="200"
+              type="text"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Categoria"/>
+  
+          </div>
+
+           <div class="relative">
+
+            <input
+              id="inputPrecoProduto"
+              autocomplete="off"
+              maxlength="200"
+              type="text"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Preço"/>
+  
+          </div>
+
+          <div class="relative">
+
+            <input
+              id="inputCustoProduto"
+              autocomplete="off"
+              maxlength="200"
+              type="text"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Custo"/>
+  
+          </div>
+
+          <div class="relative">
+
+            <textarea
+              id="inputDescricaoProduto"
+              autocomplete="off"
+              maxlength="200"
+              type="text"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Descrição"></textarea>
   
           </div>
   
           <button
-          id="btnSalvarPerfil"
+          id="btnSalvarProduto"
           type="button"
           class="block w-full mt-4 rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:scale-105 focus:scale-105 hover:opacity-80 focus:opacity-80">Salvar
           </button>

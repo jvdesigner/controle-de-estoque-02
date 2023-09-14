@@ -32,11 +32,6 @@ const storage = getStorage();
 
 let resultado;
 
-
-
-
-
-
 export async function uploadImg(file,nomearquivo,displayname,email){
 
 
