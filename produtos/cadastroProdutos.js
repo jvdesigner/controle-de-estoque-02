@@ -249,13 +249,19 @@
          };
 
 
+
         if(resultado){ 
+
+            document.getElementById('loading').style.display="flex";
+
 
             const imagemProduto = fotoProduto.files[0] ;
 
             const fotoimg = await uploadImg(imagemProduto);
 
-            adicionarProduto(fotoimg,inputNomeProduto.value,inputCategoriaProduto.value,inputPrecoProduto.value,inputCustoProduto.value,inputDescricaoProduto.value) 
+            await adicionarProduto(fotoimg,inputNomeProduto.value,inputCategoriaProduto.value,inputPrecoProduto.value,inputCustoProduto.value,inputDescricaoProduto.value) 
+
+            document.getElementById('loading').style.display="none";
         
         }
 
@@ -273,3 +279,8 @@
     // adicionar a funcao de apresentar imagem no formulario ao input do tipo file
 
     if(fotoProduto){funcao_apresentar_imagem.abrirImagem(fotoProduto,imgInput);}
+
+    
+
+    
+

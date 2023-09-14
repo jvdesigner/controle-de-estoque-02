@@ -456,99 +456,102 @@
   </div>
 </div>
 
-    <div class="mx-auto max-w-4xl">
+<div class="mx-auto max-w-4xl relative">
+
+  <section id="modalProduto" class="hidden scale-90 max-sm:scale-75 z-30  max-sm:-translate-y-20 max-sm:h-[1000px] bg-white flex-col -top-10 items-center max-sm:p-10 p-20  max-md:w-full overflow-hidden rounded-lg shadow-2xl  m-10 absolute mx-auto">
+
+    <svg id="fecharModalProdutos" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 absolute top-4 z-40 right-4 cursor-pointer">
+            <path class="stroke-red-500" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+
+        <!-- modal produtos -->
+
+          <img id="imagemModalProduto" class="w-1/2" src="https://cdn.awsli.com.br/production/static/img/produto-sem-imagem.gif" alt="">
+
+          <div class="flow-root">
+      <dl class="-my-3 divide-y divide-gray-100 text-sm ">
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-gray-900 ">Nome</dt>
+          <dd id="nomeModalProduto" class="text-gray-700  sm:col-span-2"></dd>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-gray-900 ">Categoria</dt>
+          <dd id="categoriaModalProduto" class="text-gray-700  sm:col-span-2">
+            
+          </dd>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-gray-900 ">Estoque</dt>
+          <dd id="estoqueModalProduto" class="text-gray-700  sm:col-span-2"></dd>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-gray-900 ">Preço</dt>
+          <dd id="precoModalProduto" class="text-gray-700  sm:col-span-2">
+            
+          </dd>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-gray-900 ">Custo</dt>
+          <dd id="custoModalProduto" class="text-gray-700  sm:col-span-2">
+            
+          </dd>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-gray-900 ">Descrição</dt>
+          <dd id="descricaoModalProduto" class="text-gray-700  sm:col-span-2">
+            
+          </dd>
+        </div>
+
+        <div class="py-4 mt-8">
+          <a
+            class="flex justify-center rounded bg-teal-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-teal-500"
+            href="#"
+          >
+            Adicionar Transação
+          </a>  
+        </div>
+        
+        <div class="py-4">
+          <a
+            class="flex justify-center rounded bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-600"
+            href="#"
+          >
+            Editar Informações
+          </a>  
+        </div>
+
+        <div class="py-4">
+          <a
+            class="flex justify-center w-full rounded border border-current px-8 py-3 text-sm font-medium text-red-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+            href="#"
+          >
+            Excluir
+          </a>  
+        </div>
+
+
+
+      </dl>
+    </div>
+</section>
 
 
 <section class=" relative">
+
+ 
+
 
   <div class="mx-auto  max-w-screen-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 max-sm:py-0">
 
     <header class="relative">
 
-      <section class="hidden z-30 scale-90 max-sm:-translate-y-20 max-sm:h-[150vh] bg-white flex-col -top-10 items-center max-sm:p-10 p-20  max-md:w-full overflow-hidden rounded-lg shadow-2xl  m-10 absolute mx-auto">
-
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 absolute top-4 z-40 right-4 cursor-pointer">
-                <path class="stroke-red-500" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-
-            <!-- modal produtos -->
-
-              <img class="w-1/2" src="https://i.ibb.co/GfwkG4t/b-af5daabeacf341d7901d1bd4af0ebb9f.jpg" alt="">
-
-              <div class="flow-root">
-          <dl class="-my-3 divide-y divide-gray-100 text-sm ">
-            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-              <dt class="font-medium text-gray-900 ">Nome</dt>
-              <dd class="text-gray-700  sm:col-span-2">Banana Prata</dd>
-            </div>
-
-            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-              <dt class="font-medium text-gray-900 ">Categoria</dt>
-              <dd class="text-gray-700  sm:col-span-2">
-                Frutas
-              </dd>
-            </div>
-
-            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-              <dt class="font-medium text-gray-900 ">Estoque</dt>
-              <dd class="text-gray-700  sm:col-span-2">2 unidades</dd>
-            </div>
-
-            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-              <dt class="font-medium text-gray-900 ">Preço</dt>
-              <dd class="text-gray-700  sm:col-span-2">
-                R$ 10,00
-              </dd>
-            </div>
-
-            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-              <dt class="font-medium text-gray-900 ">Custo</dt>
-              <dd class="text-gray-700  sm:col-span-2">
-                R$ 4,00
-              </dd>
-            </div>
-
-            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-              <dt class="font-medium text-gray-900 ">Descrição</dt>
-              <dd class="text-gray-700  sm:col-span-2">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et facilis
-                debitis explicabo doloremque impedit nesciunt dolorem facere.
-              </dd>
-            </div>
-
-            <div class="py-4 mt-8">
-              <a
-                class="flex justify-center rounded bg-teal-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-teal-500"
-                href="#"
-              >
-                Adicionar Transação
-              </a>  
-            </div>
-            
-            <div class="py-4">
-              <a
-                class="flex justify-center rounded bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-600"
-                href="#"
-              >
-                Editar Informações
-              </a>  
-            </div>
-
-            <div class="py-4">
-              <a
-                class="flex justify-center w-full rounded border border-current px-8 py-3 text-sm font-medium text-red-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-                href="#"
-              >
-                Excluir
-              </a>  
-            </div>
-
-
-
-          </dl>
-        </div>
-    </section>
-
+      
       <h2 class="text-xl font-bold text-gray-900 dark:text-gray-200 sm:text-3xl ">
         Meus Produtos 📦
       </h2>
