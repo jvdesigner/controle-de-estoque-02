@@ -169,7 +169,7 @@
                 funcao_alerta.alerta_campo("Produto Cadastrado com sucesso",vnome + " foi cadastrado com sucesso","bg-green-200",undefined)
             
                 setTimeout(function() {
-                    window.location.reload();
+                    window.location.href="pesquisarProdutos.html";
                 }, 3000);
 
             }
