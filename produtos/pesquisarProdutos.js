@@ -7,7 +7,7 @@
 import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";                   // importar o app
 
-import { collection, query, where, getDocs,getFirestore } 
+import { collection, query, where, getDocs,getFirestore,orderBy,limit   } 
 from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";             // importar firestore
 
 
@@ -32,11 +32,63 @@ const docRef = collection(db, "Produtos");
 
 
 // ---------------------------------------------------------------------------------------------
+// ELEMENTOS
+// ---------------------------------------------------------------------------------------------
+
+
+    const fecharModalProdutos = document.getElementById('fecharModalProdutos');
+
+    const modalProduto = document.getElementById('modalProduto');
+
+    const campoPesquisa = document.getElementById('Search');
+
+    const galleryElement = document.getElementById('galeriaProdutos');
+
+    const objOrdenarProduto = document.getElementById('objOrdenarProduto');
+
+    const listaCategoria = document.getElementById('listaCategoria');
+
+    const checkboxCategoria = document.querySelectorAll('.categoriaFiltro');
+
+    const limparFiltroCategoria = document.getElementById('limparFiltroCategoria');
+
+
+
+// ---------------------------------------------------------------------------------------------
 // FUNCOES
 // ---------------------------------------------------------------------------------------------
 
-  // -----------------------------------------
+  // retornar lista de valores selecionados do checkbox
 
+  function retornarCheckboxValuesSelected(){
+
+    const valoresSelecionados = [];
+
+    const checkboxCategoria = document.querySelectorAll('.categoriaFiltro');
+
+    checkboxCategoria.forEach(checkbox => {
+
+      if (checkbox.checked) {
+
+        valoresSelecionados.push(checkbox.value);
+      }
+
+    });
+
+    if (valoresSelecionados.length > 0) {
+
+      const q = query(docRef, where("categoria", "in", valoresSelecionados));
+
+      recuperarDados(q)
+
+      
+
+    }else{recuperarDados(docRef);}
+
+  }
+
+
+  //---------------------------------------------------
 
 
   // Recuperar todos os dados
@@ -46,12 +98,11 @@ const docRef = collection(db, "Produtos");
     document.getElementById('loading').style.display="flex";
 
       try {
+
         const querySnapshot = await getDocs(q);
-        const galleryElement = document.getElementById('galeriaProdutos'); 
+
         galleryElement.innerHTML = "";
 
-        const modalProduto = document.getElementById('modalProduto');
-    
         querySnapshot.forEach((doc) => {
 
           const data = doc.data();
@@ -67,8 +118,6 @@ const docRef = collection(db, "Produtos");
           const listItem = document.createElement("li");
 
           listItem.addEventListener('click', ()=> {
-                
-            const modalProduto = document.getElementById('modalProduto');
             
             modalProduto.querySelector('#imagemModalProduto').src = foto;
 
@@ -241,13 +290,111 @@ const docRef = collection(db, "Produtos");
       document.getElementById('loading').style.display="none";
     };
 
+
     //-------------------------------------------------------------
 
-  
+    // Retornar categorias
+    
+    async function retornarCategorias(){
 
+        const querySnapshot = await getDocs(docRef);
 
-  
-  
+        const categorias = {};
+
+        listaCategoria.innerHTML=""
+
+        querySnapshot.forEach((doc) => {
+
+          const data = doc.data();
+
+          let categoria = data.categoria;
+
+          if (categorias[categoria]) {
+            categorias[categoria]++;
+          } else {
+            categorias[categoria] = 1;
+          }
+        
+      })
+
+      
+
+      Object.keys(categorias).forEach((chave) => {
+        
+        const valor = categorias[chave];
+
+        let listItem = document.createElement("li");
+
+        listItem.addEventListener('change', retornarCheckboxValuesSelected );
+
+        listItem.innerHTML=`
+
+        <li>
+              <label for="FilterInStock" class="inline-flex items-center gap-2">
+                <input type="checkbox" value="${chave}" class="categoriaFiltro h-5 w-5 rounded border-gray-300" />
+                <span class="text-sm font-medium text-gray-700"> ${chave} (${valor}) </span>
+              </label>
+            </li>
+
+        
+        `
+
+        listaCategoria.appendChild(listItem);
+
+      });
+
+      
+      
+    };
+
+    // ------------------------------------------------
+
+    // Retornar qnt estoque
+
+    async function retornarEstoque() {
+
+      listaEstoque.innerHTML = "";
+    
+      const querySnapshot = await getDocs(docRef);
+    
+      let contador1 = 0;
+      let contador2 = 0;
+    
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        let estoque = data.estoque;
+    
+        if (estoque === 0) {
+          contador2++;
+        } else {
+          contador1++;
+        }
+      });
+    
+      const listItem1 = document.createElement("li");
+      listItem1.innerHTML = `
+        <li>
+          <label for="FilterInStock1" class="inline-flex items-center gap-2">
+            <input type="checkbox" id="FilterInStock1" class="h-5 w-5 rounded border-gray-300" />
+            <span class="text-sm font-medium text-gray-700"> Em estoque (${contador1}) </span>
+          </label>
+        </li>
+      `;
+    
+      const listItem2 = document.createElement("li");
+      listItem2.innerHTML = `
+        <li>
+          <label for="FilterInStock2" class="inline-flex items-center gap-2">
+            <input type="checkbox" id="FilterInStock2" class="h-5 w-5 rounded border-gray-300" />
+            <span class="text-sm font-medium text-gray-700"> Fora de estoque (${contador2}) </span>
+          </label>
+        </li>
+      `;
+    
+      listaEstoque.appendChild(listItem1);
+      listaEstoque.appendChild(listItem2);
+    }
+    
     
 
 
@@ -258,9 +405,6 @@ const docRef = collection(db, "Produtos");
 
     // Fechar modal de info 
 
-    const fecharModalProdutos = document.getElementById('fecharModalProdutos');
-    const modalProduto = document.getElementById('modalProduto');
-
     fecharModalProdutos.addEventListener('click',()=>{
 
       modalProduto.style.display="none";
@@ -269,9 +413,8 @@ const docRef = collection(db, "Produtos");
 
     //---------------------------------------------------------------
 
-    // Campo pesquisa
 
-    const campoPesquisa = document.getElementById('Search');
+    // Campo pesquisa
 
     campoPesquisa.addEventListener('keyup',()=>{
 
@@ -280,6 +423,73 @@ const docRef = collection(db, "Produtos");
       recuperarDados(q);
 
     })
+
+
+    // -------------------------------------------------------------
+
+    // Campo de ordenação
+
+    objOrdenarProduto.addEventListener('change', () => {
+
+      const valorSelecionado = objOrdenarProduto.value;
+    
+      if (valorSelecionado !== "Ordenar por") {
+        
+        let campoOrdenacao, ordem;
+    
+        [campoOrdenacao, ordem] = valorSelecionado.split(', ');
+  
+        let q;
+    
+        switch (campoOrdenacao) {
+          case "nome":
+            q = query(docRef, orderBy("nome", ordem));
+            break;
+          case "preco":
+            q = query(docRef, orderBy("preco", ordem));
+            break;
+          case "estoque":
+            q = query(docRef, orderBy("estoque", ordem));
+            break;
+          
+          default:
+            
+            console.error("Campo de ordenação não reconhecido:", campoOrdenacao);
+            break;
+        }
+    
+        
+        recuperarDados(q);
+
+        //alert(q)
+
+      }else{recuperarDados(docRef);}
+    });
+
+
+
+    //--------------------------------------------------
+
+    // Limpar checkbox categoria
+
+    limparFiltroCategoria.addEventListener('click',()=>{
+
+      const listaCategoria2 = document.getElementById('listaCategoria');
+      
+      const todoschecks = listaCategoria2.querySelectorAll('input[type=checkbox]')
+
+      todoschecks.forEach(checkbox => {
+  
+          checkbox.checked =false;
+  
+      });
+  
+      retornarCheckboxValuesSelected();
+
+    })
+
+    //--------------------------------------------------
+
  
 
 // ---------------------------------------------------------------------------------------------
@@ -287,3 +497,7 @@ const docRef = collection(db, "Produtos");
 // ---------------------------------------------------------------------------------------------
 
 recuperarDados(docRef);
+
+retornarCategorias()
+
+retornarEstoque()

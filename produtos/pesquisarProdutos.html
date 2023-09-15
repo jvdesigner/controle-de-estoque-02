@@ -569,7 +569,7 @@
 
 <div class="flex items-center my-4 gap-2">
 
-  <div class="relative w-1/2 max-md:w-full">
+  <div class="relative w-full max-md:w-full">
     <label for="Search" class="sr-only"> Pesquisar por... </label>
 
     <input
@@ -631,6 +631,7 @@
 
       <div class="flex  w-full">
   <div class="relative w-full ">
+
     <details class="group [&_summary::-webkit-details-marker]:hidden ">
 
       <summary class="flex cursor-pointer items-center justify-between text-gray-900 transition hover:border-gray-600  ">
@@ -650,75 +651,45 @@
           <header class="flex items-center justify-between border-t border-gray-200 p-4">
             <span class="text-sm text-gray-700"> Categoria </span>
 
-            <button type="button" class="text-sm text-gray-900 underline underline-offset-4">Limpar</button>
+            <button id="limparFiltroCategoria" type="button" class="text-sm text-gray-900 underline underline-offset-4">Limpar</button>
           </header>
 
-          <ul class="space-y-1 border-t border-gray-200 p-4">
-            <li>
-              <label for="FilterInStock" class="inline-flex items-center gap-2">
-                <input type="checkbox" id="FilterInStock" class="h-5 w-5 rounded border-gray-300" />
+          <ul id="listaCategoria" class="space-y-1 border-t border-gray-200 p-4">
 
-                <span class="text-sm font-medium text-gray-700"> Frutas (5+) </span>
-              </label>
-            </li>
-
-            <li>
-              <label for="FilterPreOrder" class="inline-flex items-center gap-2">
-                <input type="checkbox" id="FilterPreOrder" class="h-5 w-5 rounded border-gray-300" />
-
-                <span class="text-sm font-medium text-gray-700"> Legumes (5+) </span>
-              </label>
-            </li>
-
-            <li>
-              <label for="FilterOutOfStock" class="inline-flex items-center gap-2">
-                <input type="checkbox" id="FilterOutOfStock" class="h-5 w-5 rounded border-gray-300" />
-
-                <span class="text-sm font-medium text-gray-700"> Verduras (5+) </span>
-              </label>
-            </li>
+            
+            
           </ul>
 
           <header class="flex items-center justify-between border-t border-gray-200 p-4">
             <span class="text-sm text-gray-700"> Estoque </span>
 
-            <button type="button" class="text-sm text-gray-900 underline underline-offset-4">Limpar</button>
+            <button id="limparFiltroEstoque" type="button" class="text-sm text-gray-900 underline underline-offset-4">Limpar</button>
           </header>
 
-          <ul class="space-y-1 border-t border-gray-200 p-4">
-            <li>
-              <label for="FilterInStock" class="inline-flex items-center gap-2">
-                <input type="checkbox" id="FilterInStock" class="h-5 w-5 rounded border-gray-300" />
-
-                <span class="text-sm font-medium text-gray-700"> Em estoque (5+) </span>
-              </label>
-            </li>
+          <ul id="listaEstoque" class="space-y-1 border-t border-gray-200 p-4">
 
             
+            
 
-            <li>
-              <label for="FilterOutOfStock" class="inline-flex items-center gap-2">
-                <input type="checkbox" id="FilterOutOfStock" class="h-5 w-5 rounded border-gray-300" />
-
-                <span class="text-sm font-medium text-gray-700"> Fora de estoque (10+) </span>
-              </label>
-            </li>
+            
           </ul>
+
         </div>
       </div>
     </details>
+
   </div>
       </div>
 
-      <select id="SortBy" class=" rounded border-gray-300 bg-transparent dark:text-gray-500 text-sm max-sm:w-full text-gray-500 hover:text-primary cursor-pointer ">
+      <select id="objOrdenarProduto" class=" rounded border-gray-300 bg-transparent dark:text-gray-500 text-sm max-sm:w-full text-gray-500 hover:text-primary cursor-pointer ">
             
             <option>Ordenar por</option>
-            <option value="nome, DESC">Nome, DESC</option>
-            <option value="nome, ASC">Nome, ASC</option>
-            <option value="preco, DESC">Preço, DESC</option>
-            <option value="preco, ASC">Preço, ASC</option>
-            <option value="estoque, DESC">Estoque, DESC</option>
-            <option value="estoque, ASC">Estoque, ASC</option>
+            <option value="nome, desc">Nome, desc</option>
+            <option value="nome, asc">Nome, asc</option>
+            <option value="preco, desc">Preço, desc</option>
+            <option value="preco, asc">Preço, asc</option>
+            <option value="estoque, desc">Estoque, desc</option>
+            <option value="estoque, asc">Estoque, asc</option>
         
       </select>
 
