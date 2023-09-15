@@ -18,7 +18,7 @@
     import { initializeApp } 
     from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";                   // importar o app
 
-    import { getFirestore,doc,setDoc } 
+    import { getFirestore,doc,setDoc,updateDoc } 
     from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";             // importar firestore
 
     import { getStorage, ref, uploadBytesResumable, getDownloadURL }                    // importar storage

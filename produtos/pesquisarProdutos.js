@@ -185,6 +185,7 @@ function statusEstoqueProduto(objLi,qtnestoque){
 
           const data = doc.data();
 
+          let uid = doc.id;
           let nome = data.nome;
           let categoria = data.categoria;
           let preco = data.preco;
@@ -200,6 +201,8 @@ function statusEstoqueProduto(objLi,qtnestoque){
             modalProduto.querySelector('#imagemModalProduto').src = foto;
 
             modalProduto.querySelector('#nomeModalProduto').textContent = nome;
+
+            modalProduto.querySelector('#idModalProduto').textContent = uid;
 
             modalProduto.querySelector('#precoModalProduto').textContent = "R$ "+preco;
 
@@ -336,6 +339,7 @@ function statusEstoqueProduto(objLi,qtnestoque){
               >
               ${nome}
               </h3>
+              <p class="hidden idProduto">${uid}</p>
 
               <p class="mt-2">
 
@@ -584,7 +588,7 @@ function statusEstoqueProduto(objLi,qtnestoque){
 // AO INICIAR A PAGINA
 // ---------------------------------------------------------------------------------------------
 
-recuperarDados(docRef);
+recuperarDados(query(docRef,limit(50)));
 
 retornarCategorias()
 
