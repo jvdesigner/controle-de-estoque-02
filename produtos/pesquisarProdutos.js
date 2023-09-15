@@ -52,11 +52,89 @@ const docRef = collection(db, "Produtos");
 
     const limparFiltroCategoria = document.getElementById('limparFiltroCategoria');
 
+    const limparFiltroEstoque = document.getElementById('limparFiltroEstoque');
+
+
 
 
 // ---------------------------------------------------------------------------------------------
 // FUNCOES
 // ---------------------------------------------------------------------------------------------
+
+
+function statusEstoqueProduto(objLi,qtnestoque){
+
+  const tagestoquesuccess = objLi.querySelector('.tagestoquesuccess');
+  const tagestoqueWarning = objLi.querySelector('.tagestoqueWarning');
+  const tagestoqueError = objLi.querySelector('.tagestoqueError');
+
+  tagestoquesuccess.style.display="none";
+  tagestoqueWarning.style.display="none";
+  tagestoqueError.style.display="none";
+
+  if (qtnestoque === 0) {
+
+    tagestoqueError.style.display = "flex";
+
+    } else if (qtnestoque >= 5 && qtnestoque < 10) {
+
+        tagestoqueWarning.style.display = "flex";
+        
+    } else if (qtnestoque >= 10) {
+      
+        tagestoquesuccess.style.display = "flex";
+    }
+
+
+}
+
+
+
+  //---------------------------------------------------
+
+
+  // Limpar Filtro estoque
+
+    function fLimparFiltroEstoque(){
+
+      const FilterInStock1 = document.getElementById('FilterInStock1');
+      const FilterInStock2 = document.getElementById('FilterInStock2');
+
+      FilterInStock1.checked = false;
+      FilterInStock2.checked = false;
+
+      recuperarDados(docRef)
+
+
+    }
+
+
+
+  //---------------------------------------------------
+
+  // Filtro de estoque
+
+  function filtrarPorEstoque() {
+
+    const FilterInStock1 = document.getElementById('FilterInStock1');
+    const FilterInStock2 = document.getElementById('FilterInStock2');
+
+    let q; 
+
+    if (FilterInStock2.checked) {q = query(docRef, where("estoque", "<=", 0))};
+
+    if (FilterInStock1.checked) {q = query(docRef, where("estoque", ">", 0))};
+    
+    if((FilterInStock1.checked && FilterInStock2.checked)||(!FilterInStock1.checked && !FilterInStock2.checked)){
+        q = docRef
+    }
+    
+    recuperarDados(q);
+}
+
+
+  //---------------------------------------------------
+
 
   // retornar lista de valores selecionados do checkbox
 
@@ -136,8 +214,7 @@ const docRef = collection(db, "Produtos");
             modalProduto.style.display = "flex";
 
           });
-          
-          
+        
           
           listItem.innerHTML = `
 
@@ -157,7 +234,7 @@ const docRef = collection(db, "Produtos");
 
             <!-- Success -->
               <span
-                class="group/disponivel flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700 dark:bg-emerald-700 dark:text-emerald-100"
+                class="tagestoquesuccess group/disponivel flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700 dark:bg-emerald-700 dark:text-emerald-100"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -177,14 +254,14 @@ const docRef = collection(db, "Produtos");
                 <p class="whitespace-nowrap text-sm hidden">Disponível</p>
                 <div class="group-hover/disponivel:flex absolute w-full border shadow-md p-4 text-xs rounded-lg top-0 left-0 bg-emerald-100 text-emerald-700 dark:bg-emerald-700 dark:text-emerald-100 hidden items-center justify-center">
 
-                  10 unidades em estoque
+                  ${estoque} unidades em estoque
 
                 </div>
               </span>
 
               <!-- Warning -->
               <span
-                class="group/critico hidden  items-center justify-center rounded-full bg-amber-100 px-2.5 py-0.5 text-amber-700 dark:bg-amber-700 dark:text-amber-100"
+                class="tagestoqueWarning group/critico hidden  items-center justify-center rounded-full bg-amber-100 px-2.5 py-0.5 text-amber-700 dark:bg-amber-700 dark:text-amber-100"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -204,13 +281,13 @@ const docRef = collection(db, "Produtos");
                 <p class="whitespace-nowrap text-sm hidden">Crítico</p>
                 <div class="group-hover/critico:flex absolute w-full border shadow-md p-4 text-xs rounded-lg top-0 left-0 bg-amber-100 text-amber-700 dark:bg-amber-700 dark:text-amber-100 hidden items-center justify-center">
 
-                  4 unidades em estoque
+                ${estoque} unidades em estoque
 
                 </div>
               </span>
               <!-- Error -->
               <span
-                class="group/indisponivel hidden items-center justify-center rounded-full bg-red-300 px-2.5 py-0.5 text-red-700 dark:bg-red-700 dark:text-red-100"
+                class="tagestoqueError group/indisponivel hidden items-center justify-center rounded-full bg-red-300 px-2.5 py-0.5 text-red-700 dark:bg-red-700 dark:text-red-100"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +308,7 @@ const docRef = collection(db, "Produtos");
 
                 <div class="group-hover/indisponivel:flex absolute w-full border shadow-md p-4 text-xs rounded-lg top-0 left-0 bg-red-200 hidden items-center justify-center">
 
-                  0 unidades em estoque
+                ${estoque} unidades em estoque
 
                 </div>
 
@@ -278,6 +355,8 @@ const docRef = collection(db, "Produtos");
     
           
           galleryElement.appendChild(listItem);
+
+          statusEstoqueProduto(listItem,estoque);
 
           
         
@@ -390,6 +469,9 @@ const docRef = collection(db, "Produtos");
           </label>
         </li>
       `;
+
+      listItem1.addEventListener('change',filtrarPorEstoque);
+      listItem2.addEventListener('change',filtrarPorEstoque);
     
       listaEstoque.appendChild(listItem1);
       listaEstoque.appendChild(listItem2);
@@ -489,6 +571,10 @@ const docRef = collection(db, "Produtos");
     })
 
     //--------------------------------------------------
+
+    // Limpar filtro estoque
+
+    limparFiltroEstoque.addEventListener('click',fLimparFiltroEstoque)
 
  
 

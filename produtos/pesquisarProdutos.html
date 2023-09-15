@@ -53,7 +53,7 @@
 
   <main class="bg-white dark:bg-dark relative">
 
-    <header class="hidden fixed max-lg:flex z-40 justify-between  w-full drop-shadow-md bg-white dark:bg-dark py-4 px-2">
+    <header class="hidden relative max-lg:flex z-20 justify-between  w-full drop-shadow-md bg-white dark:bg-dark py-4 px-2">
   
       <a class="flex gap-4 items-center" href="index.html">
   
@@ -92,7 +92,7 @@
   
       <div class="p-2">
         <a
-          href="verPerfil.html"
+          href="../verPerfil.html"
           class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300"
           role="menuitem"
         >
@@ -100,12 +100,50 @@
         </a>
   
         <a
-          href="configuracoes.html"
+          href="../configuracoes.html"
           class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300"
           role="menuitem"
         >
           Configurações
         </a>
+
+        <a
+          href="configuracoes.html"
+          class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+          role="menuitem"
+        >
+        <label for="AcceptConditions" class="relative h-6 w-full cursor-pointer">
+  
+          <input type="checkbox" id="AcceptConditions" class="peer sr-only" />
+
+        <div
+          id="divlight"
+          class="flex items-center gap-6 rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 group/light">
+
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:stroke-gray-400"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" class="group-hover/light:stroke-primary" /></svg>
+
+
+           <p class="dark:text-gray-400  hidden group-hover/light:text-primary">Light</p> 
+        </div>
+
+        <div
+          id="divdark"
+          class="hidden items-center gap-6 rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 group/darkmode">
+
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:stroke-gray-400 group-hover/darkmode:stroke-primary"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
+
+
+
+          <p class=" dark:text-gray-400  hidden group-hover/darkmode:text-primary">Dark</p> 
+        </div>
+        
+
+        </label>
+
+        </a>
+
+
+        
   
       </div>
   
@@ -458,7 +496,7 @@
 
 <div class="mx-auto max-w-4xl relative">
 
-  <section id="modalProduto" class="hidden w-full scale-90 max-sm:scale-75 z-30  max-sm:-translate-y-20 max-sm:h-[1000px] bg-white flex-col -top-10 items-center max-sm:p-10 p-10  max-md:w-full overflow-hidden rounded-lg shadow-2xl  m-10 absolute mx-auto">
+  <section id="modalProduto" class="hidden w-full scale-90 max-sm:scale-75 z-30  max-sm:-translate-y-40 max-sm:h-[1000px] bg-white flex-col -top-10 items-center max-sm:p-10 p-10  max-md:w-full overflow-hidden rounded-lg shadow-2xl  m-10 absolute mx-auto">
 
     <svg id="fecharModalProdutos" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 absolute top-4 z-40 right-4 cursor-pointer">
             <path class="stroke-red-500" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -544,12 +582,10 @@
 
 <section class=" relative">
 
- 
 
+  <div class="mx-auto  max-w-screen-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 max-sm:py-0 max-sm:-translate-y-20">
 
-  <div class="mx-auto  max-w-screen-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 max-sm:py-0">
-
-    <header class="relative">
+    <header class="relative ">
 
       
       <h2 class="text-xl font-bold text-gray-900 dark:text-gray-200 sm:text-3xl ">
@@ -605,7 +641,7 @@
 
   <a
     class="hidden max-sm:flex items-center justify-center rounded-full border border-indigo-600 bg-indigo-600 p-2 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-    href="#"
+    href="cadastroProdutos.html"
   >
 
     <svg
@@ -627,7 +663,7 @@
 
     <!-- Filtro -->
 
-    <div class="grid grid-cols-2 max-sm:grid-cols-1 justify-between items-center  my-4 gap-4">
+    <div class="grid grid-cols-2 max-sm:grid-cols-1 justify-between items-center  my-4 gap-4 ">
 
       <div class="flex  w-full">
   <div class="relative w-full ">
@@ -728,8 +764,8 @@
         <nav class="-mb-px flex items-center  w-full justify-around" aria-label="Tabs">
   
           <a
-            href="home.html"
-            class="flex flex-col shrink-0 items-center gap-2 border-b-2 border-primary px-1 pb-4 text-sm max-sm:text-xs font-medium text-primary dark:border-violet-500 dark:text-violet-500"
+            href="../home.html"
+            class="flex flex-col shrink-0 items-center gap-2 border-b-2 border-transparent px-1 pb-4 text-sm max-sm:text-xs font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-200"
             aria-current="page"
 
           >
@@ -749,7 +785,7 @@
   
           <a
             href="#"
-            class="flex flex-col shrink-0 items-center gap-2 border-b-2 border-transparent px-1 pb-4 text-sm max-sm:text-xs font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-200"
+            class="flex flex-col shrink-0 items-center gap-2 border-b-2 border-primary px-1 pb-4 text-sm max-sm:text-xs font-medium text-primary dark:border-violet-500 dark:text-violet-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
