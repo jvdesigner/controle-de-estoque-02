@@ -1029,6 +1029,10 @@ video {
   width: 1rem;
 }
 
+.w-4\/5 {
+  width: 80%;
+}
+
 .w-5 {
   width: 1.25rem;
 }
@@ -2435,12 +2439,12 @@ video {
      object-fit: scale-down;
 }
 
-.p-2 {
-  padding: 0.5rem;
+.p-10 {
+  padding: 2.5rem;
 }
 
-.p-20 {
-  padding: 5rem;
+.p-2 {
+  padding: 0.5rem;
 }
 
 .p-4 {

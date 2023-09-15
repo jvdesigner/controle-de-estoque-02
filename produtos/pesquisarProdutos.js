@@ -41,13 +41,14 @@ const docRef = collection(db, "Produtos");
 
   // Recuperar todos os dados
 
-  async function recuperarDados() {
+  async function recuperarDados(q) {
 
     document.getElementById('loading').style.display="flex";
 
       try {
-        const querySnapshot = await getDocs(docRef);
+        const querySnapshot = await getDocs(q);
         const galleryElement = document.getElementById('galeriaProdutos'); 
+        galleryElement.innerHTML = "";
 
         const modalProduto = document.getElementById('modalProduto');
     
@@ -73,21 +74,21 @@ const docRef = collection(db, "Produtos");
 
             modalProduto.querySelector('#nomeModalProduto').textContent = nome;
 
-            modalProduto.querySelector('#precoModalProduto').textContent = preco;
+            modalProduto.querySelector('#precoModalProduto').textContent = "R$ "+preco;
 
             modalProduto.querySelector('#categoriaModalProduto').textContent = categoria;
 
-            modalProduto.querySelector('#custoModalProduto').textContent = custo;
+            modalProduto.querySelector('#custoModalProduto').textContent ="R$ "+ custo;
 
             modalProduto.querySelector('#descricaoModalProduto').textContent = descricao;
 
-            modalProduto.querySelector('#estoqueModalProduto').textContent = estoque;
+            modalProduto.querySelector('#estoqueModalProduto').textContent = estoque + " unid";
         
             modalProduto.style.display = "flex";
 
           });
           
-    
+          
           
           listItem.innerHTML = `
 
@@ -240,7 +241,13 @@ const docRef = collection(db, "Produtos");
       document.getElementById('loading').style.display="none";
     };
 
-    
+    //-------------------------------------------------------------
+
+  
+
+
+  
+  
     
 
 
@@ -261,10 +268,22 @@ const docRef = collection(db, "Produtos");
     });
 
     //---------------------------------------------------------------
+
+    // Campo pesquisa
+
+    const campoPesquisa = document.getElementById('Search');
+
+    campoPesquisa.addEventListener('keyup',()=>{
+
+      const q = query(docRef, where("nome", ">=", campoPesquisa.value), where("nome", "<=", campoPesquisa.value + "\uf8ff"));
+
+      recuperarDados(q);
+
+    })
  
 
 // ---------------------------------------------------------------------------------------------
 // AO INICIAR A PAGINA
 // ---------------------------------------------------------------------------------------------
 
-recuperarDados()
+recuperarDados(docRef);
