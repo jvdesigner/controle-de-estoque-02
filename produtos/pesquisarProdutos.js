@@ -213,6 +213,8 @@ function statusEstoqueProduto(objLi,qtnestoque){
         
             modalProduto.style.display = "flex";
 
+            document.documentElement.scrollTop = 0;
+
           });
         
           
