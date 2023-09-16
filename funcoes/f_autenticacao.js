@@ -241,7 +241,8 @@ export function sairConta(){
 
     autenticacao.sairConta(autenticacao.auth).then(() => {
 
-        window.location.href = "login.html";
+        if(window.location.pathname === "produtos/cadastroProdutos.html" || window.location.pathname === "produtos/editarProdutos.html" || window.location.pathname === "produtos/pesquisarProdutos.html"){window.location.href = "../login.html";}
+        else{window.location.href = "../login.html";}
 
         
       }).catch((error) => {

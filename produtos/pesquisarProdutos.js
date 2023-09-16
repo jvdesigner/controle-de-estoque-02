@@ -13,6 +13,7 @@ from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";               
 import { collection, query, where, getDocs,getFirestore,orderBy,limit,deleteDoc ,doc   } 
 from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";             // importar firestore
 
+import { getAuth , onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
 
 
 const firebaseConfig = {                                                            // Dados do app
@@ -32,8 +33,27 @@ const db = getFirestore(app);                                                   
 
 const docRef = collection(db, "Produtos"); 
 
+const auth = getAuth(app);
+
+let vidUsuario;
 
 
+// ---------------------------------------------------------------------------------------------
+// USUARIO
+// ---------------------------------------------------------------------------------------------
+
+function retornarIDUsuario() {
+  return new Promise((resolve) => {
+      onAuthStateChanged(auth, (user) => {
+      if (user) {
+          resolve(user.uid);
+      }
+      });
+  });
+  }
+    
+
+    
 // ---------------------------------------------------------------------------------------------
 // ELEMENTOS
 // ---------------------------------------------------------------------------------------------
@@ -114,7 +134,7 @@ const docRef = collection(db, "Produtos");
       FilterInStock1.checked = false;
       FilterInStock2.checked = false;
 
-      recuperarDados(docRef)
+      recuperarDados(query(docRef, where("idUsuario", "==", vidUsuario),limit(50)));
 
 
     }
@@ -132,12 +152,12 @@ const docRef = collection(db, "Produtos");
 
     let q; 
 
-    if (FilterInStock2.checked) {q = query(docRef, where("estoque", "<=", 0))};
+    if (FilterInStock2.checked) {q = query(docRef, where("estoque", "<=", 0), where("idUsuario", "==", vidUsuario))};
 
-    if (FilterInStock1.checked) {q = query(docRef, where("estoque", ">", 0))};
+    if (FilterInStock1.checked) {q = query(docRef, where("estoque", ">", 0), where("idUsuario", "==", vidUsuario))};
     
     if((FilterInStock1.checked && FilterInStock2.checked)||(!FilterInStock1.checked && !FilterInStock2.checked)){
-        q = docRef
+        q = query(docRef, where("idUsuario", "==", vidUsuario),limit(50))
     }
     
     recuperarDados(q);
@@ -166,13 +186,13 @@ const docRef = collection(db, "Produtos");
 
     if (valoresSelecionados.length > 0) {
 
-      const q = query(docRef, where("categoria", "in", valoresSelecionados));
+      const q = query(docRef, where("categoria", "in", valoresSelecionados), where("idUsuario", "==", vidUsuario));
 
       recuperarDados(q)
 
       
 
-    }else{recuperarDados(docRef);}
+    }else{recuperarDados(query(docRef, where("idUsuario", "==", vidUsuario),limit(50)));}
 
   }
 
@@ -393,7 +413,7 @@ const docRef = collection(db, "Produtos");
     
     async function retornarCategorias(){
 
-        const querySnapshot = await getDocs(docRef);
+        const querySnapshot = await getDocs(query(docRef, where("idUsuario", "==", vidUsuario)));
 
         const categorias = {};
 
@@ -451,7 +471,7 @@ const docRef = collection(db, "Produtos");
 
       listaEstoque.innerHTML = "";
     
-      const querySnapshot = await getDocs(docRef);
+      const querySnapshot = await getDocs(query(docRef, where("idUsuario", "==", vidUsuario)));
     
       let contador1 = 0;
       let contador2 = 0;
@@ -517,7 +537,7 @@ const docRef = collection(db, "Produtos");
 
     campoPesquisa.addEventListener('keyup',()=>{
 
-      const q = query(docRef, where("nome", ">=", campoPesquisa.value), where("nome", "<=", campoPesquisa.value + "\uf8ff"));
+      const q = query(docRef, where("idUsuario", "==", vidUsuario), where("nome", ">=", campoPesquisa.value), where("nome", "<=", campoPesquisa.value + "\uf8ff"));
 
       recuperarDados(q);
 
@@ -542,13 +562,13 @@ const docRef = collection(db, "Produtos");
     
         switch (campoOrdenacao) {
           case "nome":
-            q = query(docRef, orderBy("nome", ordem));
+            q = query(docRef, where("idUsuario", "==", vidUsuario), orderBy("nome", ordem));
             break;
           case "preco":
-            q = query(docRef, orderBy("preco", ordem));
+            q = query(docRef, where("idUsuario", "==", vidUsuario), orderBy("preco", ordem));
             break;
           case "estoque":
-            q = query(docRef, orderBy("estoque", ordem));
+            q = query(docRef, where("idUsuario", "==", vidUsuario), orderBy("estoque", ordem));
             break;
           
           default:
@@ -685,7 +705,12 @@ const docRef = collection(db, "Produtos");
 // AO INICIAR A PAGINA
 // ---------------------------------------------------------------------------------------------
 
-recuperarDados(query(docRef,limit(50)));
+await retornarIDUsuario()
+.then((result) => {
+    vidUsuario = result;
+});
+
+recuperarDados(query(docRef, where("idUsuario", "==", vidUsuario),limit(50)));
 
 retornarCategorias()
 

@@ -24,6 +24,8 @@
     import { getStorage, ref, uploadBytesResumable, getDownloadURL }                    // importar storage
     from "https://www.gstatic.com/firebasejs/10.3.1/firebase-storage.js";
 
+    import { getAuth , onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+
 
     const firebaseConfig = {                                                            // Dados do app
         apiKey: "AIzaSyDBDHzIkLUVHJ3zvWyfEvEVXxXt3lUBSCI",
@@ -41,6 +43,30 @@
     const db = getFirestore(app);                                                   // conectar com o banco
 
     const storage = getStorage();
+
+    const auth = getAuth(app);
+
+    let vidUsuario;
+
+    
+
+
+// ---------------------------------------------------------------------------------------------
+// USUARIO
+// ---------------------------------------------------------------------------------------------
+
+    
+        function retornarIDUsuario() {
+        return new Promise((resolve) => {
+            onAuthStateChanged(auth, (user) => {
+            if (user) {
+                resolve(user.uid);
+            }
+            });
+        });
+        }
+
+    
 
 
 // ---------------------------------------------------------------------------------------------
@@ -154,6 +180,8 @@
 
             const uid = generateUID();
 
+            
+
             try{
 
                 await setDoc(doc(db, "Produtos", uid), {
@@ -164,7 +192,8 @@
                 preco:parseFloat(vpreco),
                 custo:parseFloat(vcusto),
                 estoque:0,
-                descricao:vdescricao
+                descricao:vdescricao,
+                idUsuario:vidUsuario
 
                 });
 
@@ -328,6 +357,7 @@
 
                 const fotoimg = await uploadImg(imagemProduto);
 
+            
                 await adicionarProduto(fotoimg,inputNomeProduto.value,inputCategoriaProduto.value,inputPrecoProduto.value,inputCustoProduto.value,inputDescricaoProduto.value) 
 
                 document.getElementById('loading').style.display="none";
@@ -409,6 +439,18 @@
     // adicionar a funcao de apresentar imagem no formulario ao input do tipo file
 
     if(fotoProduto){funcao_apresentar_imagem.abrirImagem(fotoProduto,imgInput);}
+
+    await retornarIDUsuario()
+        .then((result) => {
+            vidUsuario = result;
+        });
+
+    
+
+    
+
+
+  
 
     
 
