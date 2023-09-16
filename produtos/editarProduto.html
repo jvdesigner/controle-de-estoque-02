@@ -16,7 +16,7 @@
 
     <script type="module" src="../menu.js"></script>
 
-    <script type="module" src="./pesquisarProdutos.js"></script>
+    <script src="cadastroProdutos.js" type="module"></script>
 
     
 
@@ -55,7 +55,7 @@
 
   <main class="bg-white dark:bg-dark relative">
 
-    <header class="hidden fixed max-lg:flex z-40 justify-between  w-full drop-shadow-md bg-white dark:bg-dark py-4 px-2">
+    <header class="hidden relative max-lg:flex z-20 justify-between  w-full drop-shadow-md bg-white dark:bg-dark py-4 px-2">
   
       <a class="flex gap-4 items-center" href="index.html">
   
@@ -156,15 +156,14 @@
   
   
     </header>
-  
     
-  <div class="flex h-screen group/menu overflow-hidden flex-col justify-between shadow-lg  bg-white dark:bg-dark w-24 hover:w-1/4 max-lg:hidden fixed left-0 z-40 ">
+  <div class="flex h-screen group/menu overflow-hidden flex-col justify-between shadow-lg  bg-white dark:bg-dark w-24 hover:w-1/4 max-lg:hidden fixed left-0 z-10 ">
   
     <div class="px-4 py-6">
   
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between ">
   
-          <div class="flex gap-4 items-center w-full relative ">
+          <div class="flex gap-4 items-center w-full relative">
             <img class="w-6 sm:w-8" src="https://ouch-cdn2.icons8.com/YjPrj9uG0t5rlAYH87OZhatg56bfDk2HYabBvJcfRWA/rs:fit:368:383/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvMTky/L2I2YjBlM2U3LTk2/MDktNGI3Ny05M2Y3/LWE1OWMxMzcwNjJl/OC5wbmc.png" alt="">
   
             <h1 class="group-hover/menu:flex hidden  w-96 left-14 absolute text-xl text-gray-500 sm:text-2xl hover:text-indigo-600 dark:text-gray-200">Estoque Fácil</h1>
@@ -267,7 +266,7 @@
   
               <li class="group/cadaastrarproduto">
                 <a
-                  href="cadastroProdutos.html"
+                  href="pesquisarProdutos.html"
                   class="flex items-center gap-6 rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                 >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover/cadaastrarproduto:stroke-primary dark:stroke-gray-400"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -450,14 +449,14 @@
   <!----------------------- conteudo ---------------------------->
   
 
-  <div class="mx-auto max-w-screen-xl px-4 max-lg:pb-40 max-md:py-28 max-sm:pb-36 py-8 sm:px-6 lg:px-8 relative">
+  <div class="mx-auto max-w-screen-xl px-4 max-lg:pb-40 max-md:py-36 max-sm:pb-36 py-16 sm:px-6 lg:px-8 relative ">
 
       <!-- alert -->
 
   <div
   id="objalert"
   role="alert"
-  class="hidden absolute max-sm:top-24 z-10 top-4 w-[95%] drop-shadow-sm rounded-xl border border-gray-100 bg-green-50 p-4 dark:border-gray-800 dark:bg-gray-700"
+  class="hidden absolute z-10 top-4 w-[95%] drop-shadow-sm rounded-xl border border-gray-100 bg-green-50 p-4 dark:border-gray-800 dark:bg-gray-700"
 >
   <div class="flex items-start gap-4">
     <span class="text-green-600">
@@ -496,259 +495,117 @@
   </div>
 </div>
 
-<div class="mx-auto max-w-4xl relative">
+    <div class="mx-auto max-w-lg max-sm:-translate-y-20">
 
-  <section id="modalProduto" class="hidden w-full scale-90 max-sm:scale-75 z-30  max-sm:-translate-y-40 max-sm:h-[1000px] bg-white flex-col -top-10 items-center max-sm:p-10 p-10  max-md:w-full overflow-hidden rounded-lg shadow-2xl  m-10 absolute mx-auto">
-
-    <svg id="fecharModalProdutos" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 absolute top-4 z-40 right-4 cursor-pointer">
-            <path class="stroke-red-500" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-
-        <!-- modal produtos -->
-
-          <img id="imagemModalProduto" class="w-1/2" src="https://cdn.awsli.com.br/production/static/img/produto-sem-imagem.gif" alt="">
-
-          <div class="flow-root w-4/5">
-      <dl class="-my-3 divide-y divide-gray-100 text-sm ">
-        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-          <dt class="font-medium text-gray-900 ">Nome</dt>
-          <dd id="nomeModalProduto" class="text-gray-700  sm:col-span-2"></dd>
-        </div>
-
-        <p id="idModalProduto" class="hidden"></p>
-
-        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-          <dt class="font-medium text-gray-900 ">Categoria</dt>
-          <dd id="categoriaModalProduto" class="text-gray-700  sm:col-span-2">
-            
-          </dd>
-        </div>
-
-        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-          <dt class="font-medium text-gray-900 ">Estoque</dt>
-          <dd id="estoqueModalProduto" class="text-gray-700  sm:col-span-2"></dd>
-        </div>
-
-        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-          <dt class="font-medium text-gray-900 ">Preço</dt>
-          <dd id="precoModalProduto" class="text-gray-700  sm:col-span-2">
-            
-          </dd>
-        </div>
-
-        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-          <dt class="font-medium text-gray-900 ">Custo</dt>
-          <dd id="custoModalProduto" class="text-gray-700  sm:col-span-2">
-            
-          </dd>
-        </div>
-
-        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-          <dt class="font-medium text-gray-900 ">Descrição</dt>
-          <dd id="descricaoModalProduto" class="text-gray-700  sm:col-span-2">
-            
-          </dd>
-        </div>
-
-        <div class="py-4 mt-8">
-          <a
-            class="flex justify-center rounded bg-teal-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-teal-500"
-            href="#"
-          >
-            Adicionar Transação
-          </a>  
-        </div>
-        
-        <div class="py-4">
-          <button
-            id="btnModalEditar"
-            class="w-full flex justify-center rounded bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-600"
-            
-          >
-            Editar Informações
-          </button>  
-        </div>
-
-        <div class="py-4">
-          <a
-            class="flex justify-center w-full rounded border border-current px-8 py-3 text-sm font-medium text-red-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-            href="#"
-          >
-            Excluir
-          </a>  
-        </div>
-
-
-
-      </dl>
-    </div>
-</section>
-
-
-<section class=" relative">
-
-
-  <div class="mx-auto  max-w-screen-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 max-sm:py-0 max-sm:-translate-y-0">
-
-    <header class="relative ">
-
-      
-      <h2 class="text-xl font-bold text-gray-900 dark:text-gray-200 sm:text-3xl ">
-        Meus Produtos 📦
-      </h2>
-
-      <p class="mt-4  text-gray-500 dark:text-gray-300 max-sm:text-sm">
-        Utilize a pesquisa ou os filtros para encontrar os produtos desejados.
+      <h1 class="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
+        Editar Produto ✍️📦
+      </h1>
+  
+      <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
+        Preencha o formulário abaixo com as informações do seu produto
       </p>
+  
+      <form
+        id="formCadastrarProduto"
+        action=""
+        class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+      >
+  
+        <div class="flex flex-col gap-6">
+          
+          <div class=" ">
 
-      <!--
-  Heads up! 👋
+            <label for="fotoProduto" class="relative flex items-center justify-center cursor-pointer group/foto">
 
-  Plugins:
-    - @tailwindcss/forms
--->
+            <img id="imgInput" class="w-1/3 mx-auto relative z-0 rounded-xl" src="https://cdn.awsli.com.br/production/static/img/produto-sem-imagem.gif" alt="">
 
-<div class="flex items-center my-4 gap-2">
+            <div class="bg-primary/20 w-1/3 h-full rounded-xl absolute z-20 top-0 hidden group-hover/foto:flex items-center justify-center">
 
-  <div class="relative w-full max-md:w-full">
-    <label for="Search" class="sr-only"> Pesquisar por... </label>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-primary"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
 
-    <input
-      type="text"
-      id="Search"
-      placeholder="Pesquisar"
-      class=" w-full p-2 rounded-md border-gray-200 py-2.5 pe-10 shadow-sm dark:border-gray-700 dark:bg-gray-600 dark:text-white sm:text-sm"
-    />
-
-    <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
-        <span class="sr-only">Search</span>
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="h-4 w-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          />
-        </svg>
-      
-    </span>
-
-  </div>
-
-    <!-- adicionar -->
-
-  <a
-    class="hidden max-sm:flex items-center justify-center rounded-full border border-indigo-600 bg-indigo-600 p-2 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-    href="cadastroProdutos.html"
-  >
-
-    <svg
-      class="h-5 w-5 rtl:rotate-180"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-    </svg>
-
-  </a>
-
-
-</div>
-
-    </header>
-
-    <!-- Filtro -->
-
-    <div class="grid grid-cols-2 max-sm:grid-cols-1 justify-between items-center  my-4 gap-4 ">
-
-      <div class="flex  w-full">
-  <div class="relative w-full ">
-
-    <details class="group [&_summary::-webkit-details-marker]:hidden ">
-
-      <summary class="flex cursor-pointer items-center justify-between text-gray-900 transition hover:border-gray-600  ">
-
-        <span class="text-sm font-medium text-gray-500 group-hover:text-primary dark:text-white"> Filtrar por </span>
-
-        <span class="transition group-open:-rotate-180">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 ">
-            <path class="dark:stroke-white" stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
-          </svg>
-        </span>
-
-      </summary>
-
-      <div class="z-50 w-96 px-2 group-open:absolute group-open:top-auto group-open:mt-2 ltr:group-open:start-0 max-sm:w-full">
-        <div class="w-96 rounded border border-gray-200 bg-white dark:bg-gray-400 max-sm:w-full">
-          <header class="flex items-center justify-between border-t border-gray-200 p-4">
-            <span class="text-sm text-gray-700"> Categoria </span>
-
-            <button id="limparFiltroCategoria" type="button" class="text-sm text-gray-900 underline underline-offset-4">Limpar</button>
-          </header>
-
-          <ul id="listaCategoria" class="space-y-1 border-t border-gray-200 p-4">
-
+            </div>
             
-            
-          </ul>
+            <input type="file" class="hidden" id="fotoProduto">
 
-          <header class="flex items-center justify-between border-t border-gray-200 p-4">
-            <span class="text-sm text-gray-700"> Estoque </span>
+            </label>
 
-            <button id="limparFiltroEstoque" type="button" class="text-sm text-gray-900 underline underline-offset-4">Limpar</button>
-          </header>
+          </div>
 
-          <ul id="listaEstoque" class="space-y-1 border-t border-gray-200 p-4">
+  
+          <div class="relative">
 
-            
-            
+            <input
+              id="inputNomeProduto"
+              autocomplete="off"
+              maxlength="200"
+              type="text"
+              class="w-full rounded-lg  border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Nome"/>
+  
+          </div>
 
-            
-          </ul>
+          <div class="relative">
 
+            <input
+              id="inputCategoriaProduto"
+              autocomplete="off"
+              maxlength="200"
+              type="text"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Categoria"/>
+  
+          </div>
+
+           <div class="relative">
+
+            <input
+              id="inputPrecoProduto"
+              autocomplete="off"
+              maxlength="200"
+              type="text"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Preço"/>
+  
+          </div>
+
+          <div class="relative">
+
+            <input
+              id="inputCustoProduto"
+              autocomplete="off"
+              maxlength="200"
+              type="text"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Custo"/>
+  
+          </div>
+
+          <div class="relative">
+
+            <textarea
+              id="inputDescricaoProduto"
+              autocomplete="off"
+              maxlength="200"
+              type="text"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:outline outline-2 dark:bg-gray-600 dark:text-white dark:focus:outline-primary/80 focus:outline-primary focus:scale-105"
+              placeholder="Descrição"></textarea>
+  
+          </div>
+  
+          <button
+          id="btnEditarProduto"
+          type="button"
+          class="block w-full mt-4 rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:scale-105 focus:scale-105 hover:opacity-80 focus:opacity-80">Salvar
+          </button>
+  
         </div>
-      </div>
-    </details>
-
-  </div>
-      </div>
-
-      <select id="objOrdenarProduto" class=" rounded border-gray-300 bg-transparent dark:text-gray-500 text-sm max-sm:w-full text-gray-500 hover:text-primary cursor-pointer ">
-            
-            <option>Ordenar por</option>
-            <option value="nome, desc">Nome, desc</option>
-            <option value="nome, asc">Nome, asc</option>
-            <option value="preco, desc">Preço, desc</option>
-            <option value="preco, asc">Preço, asc</option>
-            <option value="estoque, desc">Estoque, desc</option>
-            <option value="estoque, asc">Estoque, asc</option>
+  
+  
+  
         
-      </select>
-
-    </div>
-
-
-    <!----------------------->
-
-
-    <ul id="galeriaProdutos" class="mt-4 grid gap-4 grid-cols-4 max-2xl:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-2 max-sm:px-0 ">
-
-
-      
-
-    
-    </ul>
-  </div>
-</section>
+  
+        
+      </form>
 
     </div>
     
@@ -760,7 +617,7 @@
       <!-- mobile -->
   
   
-  <div class="hidden z-40 fixed max-lg:block w-full bottom-0 shadow-md rounded-t-xl py-4 pb-6 bg-white/90 dark:bg-dark ">
+  <div class="hidden fixed max-lg:block w-full bottom-0 shadow-md rounded-t-xl py-4 pb-6 bg-white/90 dark:bg-dark ">
   
     <div class=" flex ">
   
@@ -789,7 +646,7 @@
           </a>
   
           <a
-            href="#"
+            href="pesquisarProdutos.html"
             class="flex flex-col shrink-0 items-center gap-2 border-b-2 border-primary px-1 pb-4 text-sm max-sm:text-xs font-medium text-primary dark:border-violet-500 dark:text-violet-500"
           >
             <svg
@@ -868,7 +725,7 @@
     
   
   
-   
+   <script src="editarProduto.js"></script>
     
 </body>
 

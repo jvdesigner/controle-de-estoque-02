@@ -226,49 +226,53 @@
 
     // adicionar a funcao para cadastrar produtos ao botao de salvar do formulario
 
-    btnSalvarProduto.addEventListener('click',async ()=>{                                          
+    if(btnSalvarProduto){
 
-        let resultado = false;
+        btnSalvarProduto.addEventListener('click',async ()=>{                                          
 
-        resultado = funcao_campos_obrigatorios.verificarCamposVazios(formCadastrarProduto); 
+            let resultado = false;
 
-        if(resultado){ resultado = verificarCampoNumerico(inputPrecoProduto) }
+            resultado = funcao_campos_obrigatorios.verificarCamposVazios(formCadastrarProduto); 
 
-        if(resultado){ resultado = verificarCampoNumerico(inputCustoProduto) }
+            if(resultado){ resultado = verificarCampoNumerico(inputPrecoProduto) }
 
-        if(resultado){ 
+            if(resultado){ resultado = verificarCampoNumerico(inputCustoProduto) }
 
-            if( parseFloat(inputCustoProduto.value) > parseFloat(inputPrecoProduto.value) ){
+            if(resultado){ 
 
-                funcao_alerta.alerta_campo("O preço deve ser maior que o custo","Verifique o valor no campo do preço","bg-red-200",inputPrecoProduto) ;
+                if( parseFloat(inputCustoProduto.value) > parseFloat(inputPrecoProduto.value) ){
 
-                resultado = false
+                    funcao_alerta.alerta_campo("O preço deve ser maior que o custo","Verifique o valor no campo do preço","bg-red-200",inputPrecoProduto) ;
 
+                    resultado = false
+
+                }
+
+            };
+
+
+
+            if(resultado){ 
+
+                document.getElementById('loading').style.display="flex";
+
+
+                const imagemProduto = fotoProduto.files[0] ;
+
+                const fotoimg = await uploadImg(imagemProduto);
+
+                await adicionarProduto(fotoimg,inputNomeProduto.value,inputCategoriaProduto.value,inputPrecoProduto.value,inputCustoProduto.value,inputDescricaoProduto.value) 
+
+                document.getElementById('loading').style.display="none";
+            
             }
 
-         };
+            
+            
 
+        }); 
 
-
-        if(resultado){ 
-
-            document.getElementById('loading').style.display="flex";
-
-
-            const imagemProduto = fotoProduto.files[0] ;
-
-            const fotoimg = await uploadImg(imagemProduto);
-
-            await adicionarProduto(fotoimg,inputNomeProduto.value,inputCategoriaProduto.value,inputPrecoProduto.value,inputCustoProduto.value,inputDescricaoProduto.value) 
-
-            document.getElementById('loading').style.display="none";
-        
-        }
-
-        
-        
-
-    });
+    }
 
 
 // ---------------------------------------------------------------------------------------------

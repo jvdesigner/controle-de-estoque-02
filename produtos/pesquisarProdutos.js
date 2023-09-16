@@ -54,7 +54,9 @@ const docRef = collection(db, "Produtos");
 
     const limparFiltroEstoque = document.getElementById('limparFiltroEstoque');
 
+    const btnModalEditar = document.getElementById('btnModalEditar');
 
+    
 
 
 // ---------------------------------------------------------------------------------------------
@@ -62,32 +64,31 @@ const docRef = collection(db, "Produtos");
 // ---------------------------------------------------------------------------------------------
 
 
-function statusEstoqueProduto(objLi,qtnestoque){
+    function statusEstoqueProduto(objLi,qtnestoque){
 
-  const tagestoquesuccess = objLi.querySelector('.tagestoquesuccess');
-  const tagestoqueWarning = objLi.querySelector('.tagestoqueWarning');
-  const tagestoqueError = objLi.querySelector('.tagestoqueError');
+      const tagestoquesuccess = objLi.querySelector('.tagestoquesuccess');
+      const tagestoqueWarning = objLi.querySelector('.tagestoqueWarning');
+      const tagestoqueError = objLi.querySelector('.tagestoqueError');
 
-  tagestoquesuccess.style.display="none";
-  tagestoqueWarning.style.display="none";
-  tagestoqueError.style.display="none";
+      tagestoquesuccess.style.display="none";
+      tagestoqueWarning.style.display="none";
+      tagestoqueError.style.display="none";
 
-  if (qtnestoque === 0) {
+      if (qtnestoque === 0) {
 
-    tagestoqueError.style.display = "flex";
+        tagestoqueError.style.display = "flex";
 
-    } else if (qtnestoque >= 5 && qtnestoque < 10) {
+        } else if (qtnestoque >= 5 && qtnestoque < 10) {
 
-        tagestoqueWarning.style.display = "flex";
-        
-    } else if (qtnestoque >= 10) {
-      
-        tagestoquesuccess.style.display = "flex";
+            tagestoqueWarning.style.display = "flex";
+            
+        } else if (qtnestoque >= 10) {
+          
+            tagestoquesuccess.style.display = "flex";
+        }
+
+
     }
-
-
-}
-
 
 
   //---------------------------------------------------
@@ -581,6 +582,32 @@ function statusEstoqueProduto(objLi,qtnestoque){
     // Limpar filtro estoque
 
     limparFiltroEstoque.addEventListener('click',fLimparFiltroEstoque)
+
+
+
+    //--------------------------------------------------
+
+    // Passar informacoes do modal
+
+
+    btnModalEditar.addEventListener('click',()=>{
+
+      const ModalFotoProduto      = document.getElementById('imagemModalProduto').src;
+      const ModalNomeProduto      = document.getElementById('nomeModalProduto').textContent;
+      const ModalIDProduto        = document.getElementById('idModalProduto').textContent;
+      const ModalPrecoProduto     = document.getElementById('precoModalProduto').textContent;
+      const ModalCategoriaProduto = document.getElementById('categoriaModalProduto').textContent;
+      const ModalCustoProduto     = document.getElementById('custoModalProduto').textContent;
+      const ModalDescricaoProduto = document.getElementById('descricaoModalProduto').textContent;
+        
+
+      const urlDestino = `editarProduto.html?vIdProduto=${encodeURIComponent(ModalIDProduto)}&vNomeProduto=${encodeURIComponent(ModalNomeProduto)}&vFotoProduto=${encodeURIComponent(ModalFotoProduto)}&vPrecoProduto=${encodeURIComponent(ModalPrecoProduto)}&vCategoriaProduto=${encodeURIComponent(ModalCategoriaProduto)}&vCustoProduto=${encodeURIComponent(ModalCustoProduto)}&vDescricaoProduto=${encodeURIComponent(ModalDescricaoProduto)}`;
+
+      window.location.href = urlDestino;
+
+
+    })
+
 
  
 
