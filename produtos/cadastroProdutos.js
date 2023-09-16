@@ -66,6 +66,8 @@
 
     const btnSalvarProduto = document.getElementById('btnSalvarProduto');               // Botao de salvar
 
+    const btnEditarProduto = document.getElementById('btnEditarProduto');               // Editar
+
 
 
 
@@ -189,6 +191,71 @@
       
       // ------------------
 
+
+      // funcao para adicionar um produto
+      
+      async function editarProduto(vfoto,vnome,vcategoria,vpreco,vcusto,vdescricao){
+
+                 
+        if (vfoto instanceof Promise) {
+           
+            vfoto.then(valor => {
+              
+                if (valor === undefined) {
+                    vfoto = ""; 
+                }
+            }).catch(erro => {
+                console.error('Erro na promessa:', erro);
+            });
+        } else {
+           
+        };
+
+        if(!vfoto){vfoto=""};
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const uid = urlParams.get("vIdProduto");;
+
+        try{
+
+            await updateDoc(doc(db, "Produtos", uid), {
+
+            foto:vfoto,
+            nome:vnome,
+            categoria:vcategoria,
+            preco:parseFloat(vpreco),
+            custo:parseFloat(vcusto),
+            descricao:vdescricao
+
+            });
+
+            funcao_alerta.alerta_campo("Produto Editado com sucesso",vnome + " foi editado com sucesso","bg-green-200",undefined)
+        
+            setTimeout(function() {
+                window.location.href="pesquisarProdutos.html";
+            }, 3000);
+
+        }
+
+        catch(error){ 
+            
+            funcao_alerta.alerta_campo("Falha ao editar o produto",error.message,"bg-red-200",undefined) ;
+
+            console.log(error.message);
+
+            setTimeout( function() { window.location.reload() } , 3000) ;
+        
+        }
+
+  };
+
+  
+  // ------------------
+
+
+
+
       // funcao para fazer upload de imagem
 
       export async function uploadImg(file) {
@@ -272,7 +339,66 @@
 
         }); 
 
-    }
+    };
+
+
+    //-----------------------------------------------------------------------------------
+
+
+        // adicionar a funcao para editar produtos ao botao de salvar do formulario
+
+        if(btnEditarProduto){
+
+            btnEditarProduto.addEventListener('click',async ()=>{                                          
+    
+                let resultado = false;
+    
+                resultado = funcao_campos_obrigatorios.verificarCamposVazios(formCadastrarProduto); 
+    
+                if(resultado){ resultado = verificarCampoNumerico(inputPrecoProduto) }
+    
+                if(resultado){ resultado = verificarCampoNumerico(inputCustoProduto) }
+    
+                if(resultado){ 
+    
+                    if( parseFloat(inputCustoProduto.value) > parseFloat(inputPrecoProduto.value) ){
+    
+                        funcao_alerta.alerta_campo("O preço deve ser maior que o custo","Verifique o valor no campo do preço","bg-red-200",inputPrecoProduto) ;
+    
+                        resultado = false
+    
+                    }
+    
+                };
+    
+    
+    
+                if(resultado){ 
+    
+                    document.getElementById('loading').style.display="flex";
+    
+    
+                    const imagemProduto = fotoProduto.files[0] ;
+    
+                    let fotoimg = await uploadImg(imagemProduto);
+
+                    if(!imagemProduto){fotoimg=imgInput.src}
+    
+                    await editarProduto(fotoimg,inputNomeProduto.value,inputCategoriaProduto.value,inputPrecoProduto.value,inputCustoProduto.value,inputDescricaoProduto.value) 
+    
+                    document.getElementById('loading').style.display="none";
+                
+                }
+    
+                
+                
+    
+            }); 
+    
+        };
+    
+    
+        //-----------------------------------------------------------------------------------
 
 
 // ---------------------------------------------------------------------------------------------

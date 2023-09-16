@@ -1,5 +1,8 @@
 
 
+import * as funcao_alerta from '../funcoes/f_alerta_campo.js';
+
+
 // ---------------------------------------------------------------------------------------------
 // IMPORT FIREBASE
 // ---------------------------------------------------------------------------------------------
@@ -7,7 +10,7 @@
 import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";                   // importar o app
 
-import { collection, query, where, getDocs,getFirestore,orderBy,limit   } 
+import { collection, query, where, getDocs,getFirestore,orderBy,limit,deleteDoc ,doc   } 
 from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";             // importar firestore
 
 
@@ -56,7 +59,14 @@ const docRef = collection(db, "Produtos");
 
     const btnModalEditar = document.getElementById('btnModalEditar');
 
-    
+    const modalExcluirProduto = document.getElementById('modalExcluirProduto');
+
+    const btnexcluirproduto = document.getElementById('btnexcluirproduto');
+
+    const fecharmodalexcluirproduto = document.getElementById('fecharmodalexcluirproduto');
+
+    const btnModalExcluirProduto = document.getElementById('btnModalExcluirProduto');
+
 
 
 // ---------------------------------------------------------------------------------------------
@@ -607,6 +617,66 @@ const docRef = collection(db, "Produtos");
 
 
     })
+
+
+
+    //--------------------------------------------------
+
+    // botao para abrir o modal para excluir o produto
+
+    btnexcluirproduto.addEventListener('click',()=>{
+
+      modalExcluirProduto.style.display="flex";
+
+
+    });
+
+    //--------------------------------------------------
+
+    // botao para fechar o modal para excluir o produto
+
+    fecharmodalexcluirproduto.addEventListener('click',()=>{
+
+      modalExcluirProduto.style.display="none";
+
+
+    });
+
+    //--------------------------------------------------
+
+    // Botao de excluir produto
+
+    btnModalExcluirProduto.addEventListener('click',async()=>{
+
+      const idProdutoSelecionado = document.getElementById('idModalProduto').textContent;
+
+      try{
+
+        await deleteDoc (doc(db, "Produtos", idProdutoSelecionado));
+
+        funcao_alerta.alerta_campo("Produto Excluído com sucesso", "Produto excluido com sucesso","bg-green-200",undefined)
+    
+        setTimeout(function() {
+            window.location.href="pesquisarProdutos.html";
+        }, 3000);
+
+    }
+
+    catch(error){ 
+        
+        funcao_alerta.alerta_campo("Falha ao excluir o produto",error.message,"bg-red-200",undefined) ;
+
+        console.log(error.message);
+
+        setTimeout( function() { window.location.reload() } , 3000) ;
+    
+    }
+
+
+    })
+
+
+    //--------------------------------------------------
 
 
  

@@ -1,15 +1,4 @@
 
-
-//---------------------------------------------------------------
-
-// ELEMENTOS MODAL
-
-//---------------------------------------------------------------
-
-
-
-
-    
 //---------------------------------------------------------------
 
 // ELEMENTOS FORMULARIO
@@ -30,7 +19,7 @@
 
     const EditDescricao = document.getElementById('inputDescricaoProduto');
 
-    const btnEditarProduto = document.getElementById('btnEditarProduto');
+    
 
 
 
@@ -55,9 +44,9 @@ const CustoProduto      = urlParams.get("vCustoProduto");
 
 EditImagem.src          = FotoProduto;
 EditNome.value          = NomeProduto
-EditPreco.value         =  PrecoProduto.replace("R$ ", "")
+EditPreco.value         = PrecoProduto.replace("R$ ", "")
 EditCategoria.value     = CategoriaProduto
-EditCusto.value         =  CustoProduto.replace("R$ ", "")
+EditCusto.value         = CustoProduto.replace("R$ ", "")
 EditDescricao.value     = DescricaoProduto
 
 

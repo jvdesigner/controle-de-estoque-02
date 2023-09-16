@@ -49,6 +49,35 @@
     
     </div>
 
+    <!-- modal excluir produto -->
+    <div id="modalExcluirProduto" class="hidden h-screen top-0 bg-gray-400/50 z-50 fixed w-screen items-center justify-center p-4">
+    <div class="rounded-lg bg-white dark:bg-dark p-8 shadow-2xl mx-auto ">
+      <h2 class="text-lg font-bold dark:bg-gray-200">🗑️ Excluir produto</h2>
+    
+      <p class="mt-2 text-sm text-gray-500">
+        Você quer realmente excluir esse produto e todos seus dados?
+      </p>
+    
+      <div class="mt-4 flex gap-2">
+        <button
+          id="btnModalExcluirProduto"
+          type="button"
+          class="rounded bg-red-50 px-4 py-2 text-sm font-medium text-red-600"
+        >
+          Sim, Tenho certeza
+        </button>
+    
+        <button
+          id="fecharmodalexcluirproduto"
+          type="button"
+          class="rounded bg-gray-50 px-4 py-2 text-sm font-medium text-gray-600"
+        >
+          Não, voltar
+        </button>
+      </div>
+    </div>
+    </div>
+
 
 
 <body class=" bg-white dark:bg-dark ">
@@ -570,12 +599,13 @@
         </div>
 
         <div class="py-4">
-          <a
+          <button
+            id="btnexcluirproduto"
             class="flex justify-center w-full rounded border border-current px-8 py-3 text-sm font-medium text-red-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-            href="#"
+            
           >
             Excluir
-          </a>  
+          </button>  
         </div>
 
 
@@ -583,6 +613,7 @@
       </dl>
     </div>
 </section>
+
 
 
 <section class=" relative">
