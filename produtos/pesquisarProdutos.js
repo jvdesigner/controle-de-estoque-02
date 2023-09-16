@@ -340,7 +340,7 @@ const docRef = collection(db, "Produtos");
               id="objcardimg"
               src=${foto}
               alt=""
-              class="w-full  transition duration-500 group-hover:scale-105 "
+              class="w-full  transition duration-500 group-hover:scale-105 " style="min-height:200px;"
             />
 
             <div class="relative bg-white pt-3">
