@@ -514,6 +514,9 @@ function retornarIDUsuario() {
       listaEstoque.appendChild(listItem2);
     }
     
+    // ------------------------------------------------
+
+
     
 
 
