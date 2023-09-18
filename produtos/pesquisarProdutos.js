@@ -87,6 +87,7 @@ function retornarIDUsuario() {
 
     const btnModalExcluirProduto = document.getElementById('btnModalExcluirProduto');
 
+    const btnModalTransacao = document.getElementById('btnModalTransacao');
 
 
 // ---------------------------------------------------------------------------------------------
@@ -640,6 +641,31 @@ function retornarIDUsuario() {
 
 
     })
+
+
+    //--------------------------------------------------
+
+    // Passar informacoes do transacao
+
+
+    btnModalTransacao.addEventListener('click',()=>{
+
+      const ModalFotoProduto      = document.getElementById('imagemModalProduto').src;
+      const ModalNomeProduto      = document.getElementById('nomeModalProduto').textContent;
+      const ModalIDProduto        = document.getElementById('idModalProduto').textContent;
+      const ModalPrecoProduto     = document.getElementById('precoModalProduto').textContent;
+      const ModalCategoriaProduto = document.getElementById('categoriaModalProduto').textContent;
+      const ModalCustoProduto     = document.getElementById('custoModalProduto').textContent;
+      const ModalDescricaoProduto = document.getElementById('descricaoModalProduto').textContent;
+
+      
+      const urlDestino = `../transacoes/cadastrarTransacoes.html?vIdProduto=${encodeURIComponent(ModalIDProduto)}&vNomeProduto=${encodeURIComponent(ModalNomeProduto)}&vFotoProduto=${encodeURIComponent(ModalFotoProduto)}&vPrecoProduto=${encodeURIComponent(ModalPrecoProduto)}&vCategoriaProduto=${encodeURIComponent(ModalCategoriaProduto)}&vCustoProduto=${encodeURIComponent(ModalCustoProduto)}&vDescricaoProduto=${encodeURIComponent(ModalDescricaoProduto)}`;
+
+      window.location.href = urlDestino;
+
+
+    })
+
 
 
 
