@@ -176,11 +176,7 @@
 
             if(!vfoto){vfoto=""};
 
-        
-
             const uid = generateUID();
-
-            
 
             try{
 
