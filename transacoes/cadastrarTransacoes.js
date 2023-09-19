@@ -154,8 +154,10 @@ inputNomeProduto.value    = NomeProduto
 
             // Verificar qnt no estoque
 
-            if(tipoTransacao=="Saída" && estoque == 0 )
-                { funcaoAlerta.alerta_campo("Estoque zerado","Não é permitido cadastrar uma saída, pois o estoque desse produto está zearado","bg-red-200",undefined) ; return}
+            if(tipoTransacao=="Saída" && estoque < parseInt(Quantity.value) )
+                { funcaoAlerta.alerta_campo("Estoque Insuficiente","Não é permitido cadastrar uma saída, pois o estoque desse produto é de " + estoque + " unidades","bg-red-200",undefined) ; 
+                document.getElementById('loading').style.display="none";
+                return}
 
             // Adicionar nova transacao
 
@@ -191,7 +193,7 @@ inputNomeProduto.value    = NomeProduto
                 funcaoAlerta.alerta_campo("Transação Cadastrada com sucesso","Sua transação foi cadastrada com sucesso","bg-green-200",undefined)
             
                 setTimeout(function() {
-                    window.location.reload();
+                    window.location.href="pesquisarTransacoes.html";
                 }, 3000);
 
             }
