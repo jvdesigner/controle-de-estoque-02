@@ -173,6 +173,10 @@ inputNomeProduto.value    = NomeProduto
 
             const uid = generateUID();
 
+            const dataString = inputDataTransacao.value;
+            const data = new Date(dataString);
+            const mes = data.getMonth() + 1;
+
             try{
 
                 await setDoc(doc(db, "Transacoes", uid), {
@@ -182,6 +186,7 @@ inputNomeProduto.value    = NomeProduto
                 nome:NomeProduto,
                 quantidade:parseInt(Quantity.value),
                 data:inputDataTransacao.value,
+                mes:mes,
                 total:parseFloat(totalTransacao),
                 tipo:tipoTransacao,
                 subTipo:HeadlineAct.value,

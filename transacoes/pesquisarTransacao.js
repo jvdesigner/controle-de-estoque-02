@@ -211,6 +211,129 @@ async function recuperarDados(q) {
 };
 
 
+// Retornar meses
+    
+  async function retornarMes(q){
+
+    const listaCategoria = document.getElementById('listaCategoria')
+
+    const querySnapshot = await getDocs(q);
+
+    const categorias = {};
+
+    listaCategoria.innerHTML=""
+
+    querySnapshot.forEach((doc) => {
+
+      const data = doc.data();
+
+      let categoria = data.data;
+
+      const dataObj = new Date(categoria);
+
+      const ano = dataObj.getFullYear();
+      const dia = dataObj.getDate();
+      const mes = dataObj.toLocaleString('default', { month: 'short' });
+      const mesAbreviado = mes.slice(0, 3).toUpperCase();
+
+      if (categorias[mesAbreviado]) {
+        categorias[mesAbreviado]++;
+      } else {
+        categorias[mesAbreviado] = 1;
+      }
+
+    
+  })
+
+
+
+  Object.keys(categorias).forEach((chave) => {
+    
+    const valor = categorias[chave];
+
+    let listItem = document.createElement("li");
+
+    listItem.innerHTML=`
+
+    <li>
+          <label for="FilterInStock" class="inline-flex items-center gap-2">
+            <input type="checkbox" value="${chave}" class="categoriaFiltro mes-checkbox h-5 w-5 rounded border-gray-300" />
+            <span class="text-sm font-medium text-gray-700"> ${chave} (${valor}) </span>
+          </label>
+        </li>
+
+    
+    `
+
+    listItem.addEventListener('change', filtrarTransacoes);
+
+    listaCategoria.appendChild(listItem);
+
+  });
+
+
+
+  };
+
+// Retornar tipos
+
+async function retornarTipos(q){
+
+  const listaEstoque = document.getElementById('listaEstoque');
+
+  const querySnapshot = await getDocs(q);
+
+    const categorias = {};
+
+    listaEstoque.innerHTML=""
+
+    querySnapshot.forEach((doc) => {
+
+      const data = doc.data();
+
+      let categoria = data.subTipo;
+
+      if (categorias[categoria]) {
+        categorias[categoria]++;
+      } else {
+        categorias[categoria] = 1;
+      }
+
+    
+  })
+
+
+
+  Object.keys(categorias).forEach((chave) => {
+    
+    const valor = categorias[chave];
+
+    let listItem = document.createElement("li");
+
+    listItem.innerHTML=`
+
+    <li>
+          <label for="FilterInStock" class="inline-flex items-center gap-2">
+            <input type="checkbox" value="${chave}" class="categoriaFiltro tipo-transacao-checkbox h-5 w-5 rounded border-gray-300" />
+            <span class="text-sm font-medium text-gray-700"> ${chave} (${valor}) </span>
+          </label>
+        </li>
+
+    
+    `
+
+    listItem.addEventListener('change', filtrarTransacoes);
+
+    listaEstoque.appendChild(listItem);
+
+  });
+
+
+
+}
+
+
+
 // Excluir transacao
 
 async function excluirTransacao(ExcluirIdProduto,tipoTransacao,quantidade,uidTran){
@@ -384,6 +507,102 @@ async function alterarEstoqueProduto(valorIDProduto,vtipo,Quantity){
   }
 
 
+// Filtro e ordenacao
+
+async function filtrarTransacoes() {
+  const mesesCheckboxes = document.querySelectorAll('.mes-checkbox');
+  const tiposTransacaoCheckboxes = document.querySelectorAll('.tipo-transacao-checkbox');
+  const objOrdenarTransacao = document.querySelector('#objOrdenarTransacao');
+
+  let q;
+
+  // Capture os meses selecionados.
+  const mesesSelecionados = Array.from(mesesCheckboxes)
+    .filter(checkbox => checkbox.checked)
+    .map(checkbox => mesAbreviadoParaNumero(capitalizeFirstLetter(checkbox.value)));
+
+  // Capture os tipos de transação selecionados e converta-os para números.
+  const tiposTransacaoSelecionados = Array.from(tiposTransacaoCheckboxes)
+    .filter(checkbox => checkbox.checked)
+    .map(checkbox => checkbox.value);
+
+
+  if (mesesSelecionados.length > 0) {
+    
+    q = where('mes', 'in', mesesSelecionados)
+    
+  }
+
+  // Verifique se há tipos de transação selecionados.
+  if (tiposTransacaoSelecionados.length > 0 ) {
+    
+    if(q){q = q , where("subTipo", "in", tiposTransacaoSelecionados)}else{q = where("subTipo", "in", tiposTransacaoSelecionados)}
+    
+  }
+
+  if(objOrdenarTransacao.value!=="Ordenar por"){
+
+    const stringOriginal = objOrdenarTransacao.value;
+    const partes = stringOriginal.split(',');
+
+    const primeiraParte = partes[0]; // "data"
+    const segundaParte = partes[1];  // "asc"
+
+    if( tiposTransacaoSelecionados.length > 0 || mesesSelecionados.length > 0 )
+
+    { q = q , orderBy(primeiraParte,segundaParte) }
+
+    else
+
+    { q = orderBy(primeiraParte,segundaParte)}
+
+    
+    
+  }
+
+  recuperarDados(query(docRef,where("idUsuario", "==", vidUsuario),q));
+}
+
+
+
+// Deixar a astring com a primeira letra maiuscula
+function capitalizeFirstLetter(str) {
+  // Verifica se a string não está vazia
+  if (str.length === 0) {
+    return str;
+  }
+
+  // Converte o primeiro caractere para maiúscula e o restante para minúscula
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+// Retornar numero do mes
+function mesAbreviadoParaNumero(mesAbreviado) {
+  const mapaMeses = {
+    'Jan': 1,
+    'Fev': 2,
+    'Mar': 3,
+    'Abr': 4,
+    'Mai': 5,
+    'Jun': 6,
+    'Jul': 7,
+    'Ago': 8,
+    'Set': 9,
+    'Out': 10,
+    'Nov': 11,
+    'Dez': 12
+  };
+
+  // Verifica se o mês abreviado está no mapa e retorna o número correspondente.
+  if (mapaMeses.hasOwnProperty(mesAbreviado)) {
+    return mapaMeses[mesAbreviado];
+  } else {
+    // Retorna um valor padrão ou lança um erro, dependendo da sua lógica.
+    return null; // Ou outra ação adequada, como lançar um erro.
+  }
+}
+
+
 
 // ---------------------------------------------------------------------------------------------
 // AO INICIAR A PAGINA
@@ -395,4 +614,37 @@ await retornarIDUsuario()
 });
 
 recuperarDados(query(docRef, where("idUsuario", "==", vidUsuario),orderBy("data","desc")));
+
+retornarMes(query(docRef, where("idUsuario", "==", vidUsuario),orderBy("data","desc")));
+
+retornarTipos(query(docRef, where("idUsuario", "==", vidUsuario)));
     
+
+
+// ---------------------------------------------------------------------------------------------
+// EVENTOS
+// ---------------------------------------------------------------------------------------------
+
+document.getElementById('objOrdenarTransacao').addEventListener('change', filtrarTransacoes);
+
+
+// Campo pesquisa
+
+const Search = document.getElementById('Search');
+
+Search.addEventListener('keyup',()=>{
+
+  const q = query(docRef, where("idUsuario", "==", vidUsuario), where("nome", ">=", Search.value), where("nome", "<=", Search.value + "\uf8ff"));
+
+  recuperarDados(q);
+
+})
+
+
+
+
+
+
+
+
+
