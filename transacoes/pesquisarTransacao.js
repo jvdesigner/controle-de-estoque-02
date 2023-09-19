@@ -560,7 +560,14 @@ async function filtrarTransacoes() {
     
   }
 
-  recuperarDados(query(docRef,where("idUsuario", "==", vidUsuario),q));
+  if( mesesSelecionados.length == 0 && tiposTransacaoSelecionados.length == 0 && objOrdenarTransacao.value=="Ordenar por" )
+  { recuperarDados(query(docRef, where("idUsuario", "==", vidUsuario),orderBy("data","desc"))); }
+
+  else
+
+  { recuperarDados(query(docRef,where("idUsuario", "==", vidUsuario),q)); }
+
+  
 }
 
 
@@ -639,6 +646,40 @@ Search.addEventListener('keyup',()=>{
   recuperarDados(q);
 
 })
+
+
+// Limpar filtros
+
+const limparFiltroCategoria = document.getElementById('limparFiltroCategoria');
+
+const limparFiltroEstoque = document.getElementById('limparFiltroEstoque');
+
+
+limparFiltroCategoria.addEventListener('click', () => {
+
+  const checkboxes = document.querySelectorAll('.mes-checkbox');
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false; // Desmarca a caixa de seleção.
+  });
+
+  filtrarTransacoes()
+
+});
+
+limparFiltroEstoque.addEventListener('click', () => {
+
+  const checkboxes = document.querySelectorAll('.tipo-transacao-checkbox');
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false; // Desmarca a caixa de seleção.
+  });
+
+  filtrarTransacoes()
+
+});
+
+
 
 
 
