@@ -7,7 +7,7 @@
 import { initializeApp } 
     from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";                   // importar o app
 
-    import { collection, query, where, getDocs,getFirestore,orderBy,limit,deleteDoc ,doc,setDoc,updateDoc } 
+    import { collection, query, where, getDocs,getDoc,getFirestore,orderBy,limit,deleteDoc ,doc,setDoc,updateDoc } 
     from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";             // importar firestore
 
     import { getAuth , onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
@@ -152,9 +152,11 @@ inputNomeProduto.value    = NomeProduto
 
             document.getElementById('loading').style.display="flex";
 
+            await retornarEstoque(IdProduto)
+
             // Verificar qnt no estoque
 
-            if(tipoTransacao=="Saída" && estoque < parseInt(Quantity.value) )
+            if(tipoTransacao=="Saída" && parseInt(estoque) < parseInt(Quantity.value) )
                 { funcaoAlerta.alerta_campo("Estoque Insuficiente","Não é permitido cadastrar uma saída, pois o estoque desse produto é de " + estoque + " unidades","bg-red-200",undefined) ; 
                 document.getElementById('loading').style.display="none";
                 return}
@@ -375,17 +377,13 @@ inputNomeProduto.value    = NomeProduto
 
       async function retornarEstoque(valorIDProduto) {
       
-        const querySnapshot = await getDocs(query(collection(db, "Produtos"),valorIDProduto));
-      
-        querySnapshot.forEach( (doc) => {
-
-          const data = doc.data();
-
-           estoque = data.estoque;
+        const querySnapshot = await getDoc(doc(db, "Produtos",valorIDProduto));
+    
+    
+          const data = querySnapshot.data();
+    
+           estoque = data.estoque;    
         
-        })
-
-        return estoque;
         
         };
 
@@ -397,11 +395,11 @@ inputNomeProduto.value    = NomeProduto
 
         if
         
-        (tipoTransacao=="Entrada"){await updateDoc(doc(db, "Produtos", valorIDProduto), {estoque : parseInt(estoque + Quantity.value)})}
+        (tipoTransacao=="Entrada"){await updateDoc(doc(db, "Produtos", valorIDProduto), {estoque : parseInt(estoque) + parseInt(Quantity.value)})}
 
         else
 
-        {await updateDoc(doc(db, "Produtos", valorIDProduto), {estoque : parseInt(estoque - Quantity.value)})}
+        {await updateDoc(doc(db, "Produtos", valorIDProduto), {estoque : parseInt(estoque) - parseInt(Quantity.value)})}
 
 
         

@@ -14,6 +14,8 @@ export function alerta_campo(v_titulo,v_mensagem,v_cor,obj_campo){
 
     const iconsucess = document.getElementById('icon-success');
 
+    objalert.style.zIndex = '1000';
+
 
     objalert.classList.remove('bg-green-200');
     objalert.classList.remove('bg-red-200');

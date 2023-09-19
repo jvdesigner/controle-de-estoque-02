@@ -10,7 +10,7 @@ import * as funcao_alerta from '../funcoes/f_alerta_campo.js';
 import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";                   // importar o app
 
-import { collection, query, where, getDocs,getFirestore,orderBy,limit,deleteDoc ,doc   } 
+import { collection, query, where, getDocs,getDoc,getFirestore,orderBy,limit,deleteDoc ,doc   } 
 from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";             // importar firestore
 
 import { getAuth , onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
@@ -109,7 +109,7 @@ function retornarIDUsuario() {
 
         tagestoqueError.style.display = "flex";
 
-        } else if (qtnestoque >= 5 && qtnestoque < 10) {
+        } else if (qtnestoque >= 1 && qtnestoque < 10) {
 
             tagestoqueWarning.style.display = "flex";
             
