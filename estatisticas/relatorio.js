@@ -295,7 +295,15 @@ function FiltrarFaturamento(){
 
 async function ListadeCusto(){
 
-    const qCusto = query(docRefTran, where("idUsuario", "==", vidUsuario) , where("subTipo", "==", "Compra")  );
+    
+    const anoAtual = new Date().getFullYear();
+    
+    const qCusto = query(
+        docRefTran, 
+        where("idUsuario", "==", vidUsuario) , 
+        where("subTipo", "==", "Compra"), 
+        where('data', '>=', `${anoAtual}-01-01`), 
+        where('data', '<=', `${anoAtual}-12-31`)  );
 
     let valorCusto = 0;
 
@@ -334,7 +342,14 @@ async function ListadeCusto(){
 
 async function ListadeLucro(){
 
-    const qLucro = query(docRefTran, where("idUsuario", "==", vidUsuario) , where("subTipo", "==", "Venda")  );
+    const anoAtual = new Date().getFullYear();
+    
+    const qLucro = query(
+        docRefTran, 
+        where("idUsuario", "==", vidUsuario) , 
+        where("subTipo", "==", "Venda"), 
+        where('data', '>=', `${anoAtual}-01-01`), 
+        where('data', '<=', `${anoAtual}-12-31`)  );
 
     let valorLucro = 0;
 
@@ -421,7 +436,8 @@ function formatarDataParaMesAno(data) {
       'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'
     ];
     const mes = mesesAbreviados[parseInt(partes[1], 10) - 1]; // Obtém o mês abreviado
-    return `${mes} ${partes[0]}`;
+    //return `${mes} ${partes[0]}`;
+    return `${mes}`;
   }
 
 // GRAFICO FATURAMENTO 
@@ -513,3 +529,170 @@ async function GraficoFaturamento(){
 }
 
 GraficoFaturamento()
+
+
+
+
+
+// -- Transacoes por categoria --
+
+// gerar cores
+
+function gerarCorHSL() {
+    const matiz = Math.random() * 360; // Valor aleatório para a matiz (0-360)
+    const saturacao = 70 + Math.random() * 10; // Saturação entre 70% e 80%
+    const luminosidade = 60 + Math.random() * 10; // Luminosidade entre 60% e 70%
+    return `hsl(${matiz.toFixed(0)}, ${saturacao.toFixed(0)}%, ${luminosidade.toFixed(0)}%)`;
+  }
+
+// Retornar categoria
+
+
+let subtiposList;
+let contagensList;
+let contagemTotal;
+
+async function retornarSubTipos() {
+    const anoAtual = new Date().getFullYear();
+  
+    const q = query(
+      docRefTran,
+      where("idUsuario", "==", vidUsuario),
+      where('data', '>=', `${anoAtual}-01-01`),
+      where('data', '<=', `${anoAtual}-12-31`)
+    );
+  
+    const querySnapshot = await getDocs(q);
+  
+    const subtiposContagem = {};
+    contagemTotal = 0;
+  
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+  
+      if (data.subTipo) {
+        if (subtiposContagem[data.subTipo]) {
+          subtiposContagem[data.subTipo]++;
+        } else {
+          subtiposContagem[data.subTipo] = 1;
+        }
+  
+        contagemTotal++;
+      }
+    });
+  
+    subtiposList = Object.keys(subtiposContagem);
+    contagensList = subtiposList.map((subtipo) => {
+      const porcentagem = (subtiposContagem[subtipo] / contagemTotal) * 100;
+      return parseFloat( porcentagem.toFixed(1) ); // Arredonda para uma casa decimal
+    });
+  
+   
+  }
+
+await retornarSubTipos()
+
+const coresList = subtiposList.map(() => gerarCorHSL());
+
+// Formatacao do grafico
+
+function formatarGraficoTransacoesCategoria(){
+  
+    
+      const getChartOptions = () => {
+          return {
+            series: contagensList,
+            colors: coresList,
+            chart: {
+              height: "110%",
+              width: "100%",
+              type: "donut",
+            },
+            stroke: {
+              colors: ["transparent"],
+              lineCap: "",
+            },
+            plotOptions: {
+              pie: {
+                donut: {
+                  labels: {
+                    show: true,
+                    name: {
+                      show: true,
+                      fontFamily: "Inter, sans-serif",
+                      offsetY: 20,
+                    },
+                    total: {
+                      showAlways: true,
+                      show: true,
+                      label: "Total",
+                      fontFamily: "Inter, sans-serif",
+                      formatter: function (w) {
+                        const sum = w.globals.seriesTotals.reduce((a, b) => {
+                          return a + b
+                        }, 0)
+                        return `${sum}`
+                      },
+                    },
+                    value: {
+                      show: true,
+                      fontFamily: "Inter, sans-serif",
+                      offsetY: -20,
+                      formatter: function (value) {
+                        return value 
+                      },
+                    },
+                  },
+                  size: "80%",
+                },
+              },
+            },
+            grid: {
+              padding: {
+                top: -2,
+              },
+            },
+            labels: subtiposList,
+            dataLabels: {
+              enabled: false,
+            },
+            legend: {
+              position: "bottom",
+              fontFamily: "Inter, sans-serif",
+            },
+            yaxis: {
+              labels: {
+                formatter: function (value) {
+                  return value 
+                },
+              },
+            },
+            xaxis: {
+              labels: {
+                formatter: function (value) {
+                  return value  
+                },
+              },
+              axisTicks: {
+                show: false,
+              },
+              axisBorder: {
+                show: false,
+              },
+            },
+          }
+        }
+  
+        if (document.getElementById("donut-chart") && typeof ApexCharts !== 'undefined') {
+          const chart = new ApexCharts(document.getElementById("donut-chart"), getChartOptions());
+          chart.render();
+  
+          
+        }
+   
+
+
+
+}
+
+formatarGraficoTransacoesCategoria()
