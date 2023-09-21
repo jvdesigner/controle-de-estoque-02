@@ -35,6 +35,11 @@ const auth = getAuth(app);
 
 let vidUsuario;
 
+const modalProdutos = document.getElementById('modalProdutos');
+const iconcloseModal = document.getElementById('iconcloseModal');
+
+
+
 
 // ---------------------------------------------------------------------------------------------
 // USUARIO
@@ -97,6 +102,12 @@ async function produtosEstoqueZerado() {
           let foto = data.foto;
     
           const listItem = document.createElement("li");
+
+          let listainfo = [uid,nome,categoria,preco,custo,descricao,estoque,foto];
+
+          listItem.addEventListener('click',()=>{modalProdutos.style.display="flex"})
+          
+          listItem.addEventListener('click',()=>{ passarInfoModal(listainfo) })
         
           
           listItem.innerHTML = `
@@ -138,3 +149,67 @@ async function produtosEstoqueZerado() {
 };
 
 produtosEstoqueZerado();
+
+
+
+
+// ---------------------------------------------------------------------------------------------
+// EVENTOS
+// ---------------------------------------------------------------------------------------------
+
+iconcloseModal.addEventListener('click',()=>{modalProdutos.style.display="none"})
+
+
+// ---------------------------------------------------------------------------------------------
+// FUNCOES
+// ---------------------------------------------------------------------------------------------
+
+let listaProdutos;
+
+function passarInfoModal(lista){
+
+    listaProdutos = lista;
+
+    const modalProdutosFoto = document.getElementById('modalProdutosFoto')
+    const modalProdutosNome = document.getElementById('modalProdutosNome')
+    const modalProdutosCategoria = document.getElementById('modalProdutosCategoria')
+    const modalProdutosEstoque = document.getElementById('modalProdutosEstoque')
+    const modalProdutosPreço = document.getElementById('modalProdutosPreço')
+    const modalProdutosCusto = document.getElementById('modalProdutosCusto')
+    const modalProdutosID = document.getElementById('modalProdutosID')
+    const modalProdutosDescricao = document.getElementById('modalProdutosDescricao')
+    
+    //const modalProdutosID = document.getElementById('modalProdutosID')
+
+    //let lista = [uid,nome,categoria,preco,custo,descricao,estoque,foto];
+
+    modalProdutosFoto.src = lista[7]
+
+    modalProdutosNome.textContent = lista[1]
+    modalProdutosCategoria.textContent = lista[2]
+    modalProdutosEstoque.textContent = lista[6] + " unid"
+    modalProdutosPreço.textContent = "R$ " + lista[3]
+    modalProdutosCusto.textContent = "R$ " + lista[4]
+    modalProdutosID.textContent = lista[0]
+    modalProdutosDescricao.textContent = lista[5]
+
+
+}
+
+
+
+ // Passar informacoes do modal
+
+const btnModalEditar = document.getElementById('btnModalEditar');
+
+ btnModalEditar.addEventListener('click',()=>{
+
+    // lista = [uid,nome,categoria,preco,custo,descricao,estoque,foto];
+      
+
+    const urlDestino = `produtos/editarProduto.html?vIdProduto=${encodeURIComponent(listaProdutos[0])}&vNomeProduto=${encodeURIComponent(listaProdutos[1])}&vFotoProduto=${encodeURIComponent(listaProdutos[7])}&vPrecoProduto=${encodeURIComponent(listaProdutos[3])}&vCategoriaProduto=${encodeURIComponent(listaProdutos[2])}&vCustoProduto=${encodeURIComponent(listaProdutos[4])}&vDescricaoProduto=${encodeURIComponent(listaProdutos[5])}`;
+
+    window.location.href = urlDestino;
+
+
+  })
