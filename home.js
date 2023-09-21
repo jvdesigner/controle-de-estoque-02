@@ -148,7 +148,14 @@ async function produtosEstoqueZerado() {
     
 };
 
-produtosEstoqueZerado();
+await produtosEstoqueZerado();
+
+const galeriaProdutosZerados = document.getElementById('galeriaProdutosZerados');
+
+if(galeriaProdutosZerados.childElementCount==0){
+    document.getElementById('txProdutosEstoqueZerado').textContent = "Você ainda não tem produtos cadastrados";
+}
+
 
 
 
@@ -198,7 +205,7 @@ function passarInfoModal(lista){
 
 
 
- // Passar informacoes do modal
+ // Passar informacoes do modal editar produto
 
 const btnModalEditar = document.getElementById('btnModalEditar');
 
@@ -213,3 +220,23 @@ const btnModalEditar = document.getElementById('btnModalEditar');
 
 
   })
+
+  // ADD TRANSACAO
+
+  //btnModaladdTransacao
+
+  const btnModaladdTransacao = document.getElementById('btnModaladdTransacao');
+
+  btnModaladdTransacao.addEventListener('click',()=>{
+
+    // lista = [uid,nome,categoria,preco,custo,descricao,estoque,foto];
+      
+
+    const urlDestino = `transacoes/cadastrarTransacoes.html?vIdProduto=${encodeURIComponent(listaProdutos[0])}&vNomeProduto=${encodeURIComponent(listaProdutos[1])}&vFotoProduto=${encodeURIComponent(listaProdutos[7])}&vPrecoProduto=${encodeURIComponent(listaProdutos[3])}&vCategoriaProduto=${encodeURIComponent(listaProdutos[2])}&vCustoProduto=${encodeURIComponent(listaProdutos[4])}&vDescricaoProduto=${encodeURIComponent(listaProdutos[5])}`;
+
+    window.location.href = urlDestino;
+
+
+  })
+
+  

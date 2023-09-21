@@ -88,11 +88,11 @@
         </div>   
 
         <div class=" flex flex-col gap-2  w-full">  
-          <button type="button" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Adicionar Transação</button>
+          <button id="btnModaladdTransacao" type="button" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Adicionar Transação</button>
 
           <button id="btnModalEditar" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Editar Informações</button>
-          
-          <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Excluir Produto</button>
+
+          <button type="button" class="text-white hidden bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Excluir Produto</button>
         </div>
 
       </div>
@@ -573,7 +573,7 @@
           
       </div>
       <!-- Slider indicators -->
-      <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+      <div class="hidden absolute z-30  space-x-3 -translate-x-1/2 bottom-5 left-1/2">
           <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
           <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
           <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
@@ -600,7 +600,7 @@
     <!-- Produtos com estoque zerado -->
 
     <div class="space-y-8 my-6">
-      <p class="text-2xl max-lg:text-lg max-md:text-sm font-medium text-yellow-400">Produtos com o estoque zerado ⚠️</p>
+      <p id="txProdutosEstoqueZerado" class="text-2xl max-lg:text-lg max-md:text-sm font-medium text-yellow-400">Produtos com o estoque zerado ⚠️</p>
 
       
       <ul id="galeriaProdutosZerados" class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-2">
