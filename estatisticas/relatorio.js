@@ -39,6 +39,9 @@ const auth = getAuth(app);
 let vidUsuario;
 
 
+document.getElementById('loading').style.display="flex";
+
+
 // ---------------------------------------------------------------------------------------------
 // USUARIO
 // ---------------------------------------------------------------------------------------------
@@ -178,6 +181,8 @@ async function TotaldeCusto(){
       });
 
       document.getElementById('txtCustoTotal').textContent = "R$ " + valorTotal.toFixed(2) 
+      document.getElementById('custo02').textContent = "R$ " + valorTotal.toFixed(2) 
+     
 
 };
 
@@ -204,6 +209,8 @@ async function TotaldeLucro(){
       });
 
       document.getElementById('txtLucroTotal').textContent = "R$ " + valorTotal.toFixed(2) 
+      document.getElementById('lucro02').textContent = "R$ " + valorTotal.toFixed(2) 
+
 
 };
 
@@ -631,7 +638,7 @@ function formatarGraficoTransacoesCategoria(){
                         const sum = w.globals.seriesTotals.reduce((a, b) => {
                           return a + b
                         }, 0)
-                        return `${sum}`
+                        return `${sum.toFixed(2)}%`
                       },
                     },
                     value: {
@@ -639,7 +646,7 @@ function formatarGraficoTransacoesCategoria(){
                       fontFamily: "Inter, sans-serif",
                       offsetY: -20,
                       formatter: function (value) {
-                        return value 
+                        return value +'%'
                       },
                     },
                   },
@@ -663,14 +670,14 @@ function formatarGraficoTransacoesCategoria(){
             yaxis: {
               labels: {
                 formatter: function (value) {
-                  return value 
+                  return value +'%'
                 },
               },
             },
             xaxis: {
               labels: {
                 formatter: function (value) {
-                  return value  
+                  return value  +'%'
                 },
               },
               axisTicks: {
@@ -696,3 +703,310 @@ function formatarGraficoTransacoesCategoria(){
 }
 
 formatarGraficoTransacoesCategoria()
+
+
+// CUSTO VS LUCRO
+
+async function obterDadosTransacoes() {
+  const anoAtual = new Date().getFullYear();
+  const q = query(
+    docRefTran,
+    where("idUsuario", "==", vidUsuario),
+    where('data', '>=', `${anoAtual}-01-01`), 
+    where('data', '<=', `${anoAtual}-12-31`)  
+  );
+
+  const querySnapshot = await getDocs(q);
+
+  const meses = [];
+  const valoresLucro = [];
+  const valoresCusto = [];
+
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    const mesAno = formatarDataParaMesAno(data.data);
+
+    // Verifique se o tipo de transação é compra ou venda
+    if (data.subTipo === "Compra") {
+      // Adicione o valor total como custo
+      valoresCusto.push(data.total);
+      valoresLucro.push(0); // Lucro é 0 para compras
+    } else if (data.subTipo === "Venda") {
+      // Adicione o valor total como lucro
+      valoresLucro.push(data.total);
+      valoresCusto.push(0); // Custo é 0 para vendas
+    }
+
+    // Adicione o mês ao array de meses, se ainda não estiver presente
+    if (!meses.includes(mesAno)) {
+      meses.push(mesAno);
+    }
+  });
+
+  return [meses, valoresLucro, valoresCusto];
+}
+
+
+async function graficoCustoLucro(){
+
+  const [meses, valoresLucro, valoresCusto] = await obterDadosTransacoes();
+    
+      let options = {
+        // enable and customize data labels using the following example, learn more from here: https://apexcharts.com/docs/datalabels/
+        dataLabels: {
+          enabled: true,
+          // offsetX: 10,
+          style: {
+            cssClass: 'text-xs text-white font-medium'
+          },
+        },
+        grid: {
+          show: false,
+          strokeDashArray: 4,
+          padding: {
+            left: 16,
+            right: 16,
+            top: -26
+          },
+        },
+        series: [
+          {
+            name: "Lucro",
+            data: valoresLucro,
+            color: "#1A56DB",
+          },
+          {
+            name: "Custo",
+            data: valoresCusto,
+            color: "#7E3BF2",
+          },
+        ],
+        chart: {
+          height: "100%",
+          maxWidth: "100%",
+          type: "area",
+          fontFamily: "Inter, sans-serif",
+          dropShadow: {
+            enabled: false,
+          },
+          toolbar: {
+            show: false,
+          },
+        },
+        tooltip: {
+          enabled: true,
+          x: {
+            show: false,
+          },
+        },
+        legend: {
+          show: true
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            opacityFrom: 0.55,
+            opacityTo: 0,
+            shade: "#1C64F2",
+            gradientToColors: ["#1C64F2"],
+          },
+        },
+        stroke: {
+          width: 6,
+        },
+        xaxis: {
+          categories: meses,
+          labels: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
+        },
+        yaxis: {
+          show: false,
+          labels: {
+            formatter: function (value) {
+              return '$' + value;
+            }
+          }
+        },
+      }
+  
+      if (document.getElementById("data-labels-chart") && typeof ApexCharts !== 'undefined') {
+        const chart = new ApexCharts(document.getElementById("data-labels-chart"), options);
+        chart.render();
+      }
+    
+
+
+
+}
+
+graficoCustoLucro();
+
+
+// TOP 10 PRODUTOS
+
+async function obterTop10ProdutosComMaiorLucro() {
+  const anoAtual = new Date().getFullYear();
+  const q = query(
+    docRefTran,
+    where("idUsuario", "==", vidUsuario),
+    where("subTipo", "==", "Venda"),
+    where('data', '>=', `${anoAtual}-01-01`), 
+    where('data', '<=', `${anoAtual}-12-31`)
+  );
+
+  const querySnapshot = await getDocs(q);
+
+  // Criar um objeto para rastrear o lucro por produto
+  const lucroPorProduto = {};
+
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    const produto = data.nome;
+    const lucro = data.total;
+
+    // Verificar se o produto já foi registrado
+    if (!lucroPorProduto[produto]) {
+      lucroPorProduto[produto] = 0;
+    }
+
+    // Adicionar o lucro ao produto
+    lucroPorProduto[produto] += lucro;
+  });
+
+  // Classificar os produtos com base no lucro em ordem decrescente
+  const produtosOrdenados = Object.keys(lucroPorProduto).sort(
+    (produtoA, produtoB) => lucroPorProduto[produtoB] - lucroPorProduto[produtoA]
+  );
+
+  // Selecionar os top 10 produtos com maior lucro
+  const top10Produtos = produtosOrdenados.slice(0, 10);
+
+  // Obter os valores de lucro correspondentes
+  const valoresLucroTop10 = top10Produtos.map((produto) => parseFloat(lucroPorProduto[produto].toFixed(2)));
+
+  return [top10Produtos, valoresLucroTop10];
+}
+
+let vtop10Produtos
+let vvaloresLucroTop10
+// Uso da função
+await obterTop10ProdutosComMaiorLucro().then(([top10Produtos, valoresLucroTop10]) => {
+  //console.log("Top 10 Produtos com Maior Lucro:", top10Produtos);
+  //console.log("Valores de Lucro Correspondentes:", valoresLucroTop10);
+  vtop10Produtos=top10Produtos;
+  vvaloresLucroTop10=valoresLucroTop10
+});
+
+function graficoTop10Produtos(){
+
+  var options = {
+      series: [
+      {
+          name: "Venda",
+          color: "#31C48D",
+          data: vvaloresLucroTop10,
+      }
+      ],
+      chart: {
+      sparkline: {
+          enabled: false,
+      },
+      type: "bar",
+      width: "100%",
+      height: 400,
+      toolbar: {
+          show: false,
+      }
+      },
+      fill: {
+      opacity: 1,
+      },
+      plotOptions: {
+      bar: {
+          horizontal: true,
+          columnWidth: "100%",
+          borderRadiusApplication: "end",
+          borderRadius: 6,
+          dataLabels: {
+          position: "top",
+          },
+      },
+      },
+      legend: {
+      show: true,
+      position: "bottom",
+      },
+      dataLabels: {
+      enabled: false,
+      },
+      tooltip: {
+      shared: true,
+      intersect: false,
+      formatter: function (value) {
+          return "R$" + value
+      }
+      },
+      xaxis: {
+      labels: {
+          show: true,
+          style: {
+          fontFamily: "Inter, sans-serif",
+          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400 '
+          },
+          formatter: function(value) {
+          return "R$" + value
+          }
+      },
+      categories: vtop10Produtos,
+      axisTicks: {
+          show: false,
+      },
+      axisBorder: {
+          show: false,
+      },
+      },
+      yaxis: {
+      labels: {
+          show: true,
+          style: {
+          fontFamily: "Inter, sans-serif",
+          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400 translate-x-2'
+          }
+      }
+      },
+      grid: {
+      show: true,
+      strokeDashArray: 4,
+      padding: {
+          left: 2,
+          right: 2,
+          top: -20
+      },
+      },
+      fill: {
+      opacity: 1,
+      }
+  }
+
+  if(document.getElementById("bar-chart") && typeof ApexCharts !== 'undefined') {
+      const chart = new ApexCharts(document.getElementById("bar-chart"), options);
+      chart.render();
+  }
+
+
+
+}
+
+graficoTop10Produtos();
+
+// CARREGANDO
+
+
+document.getElementById('loading').style.display="none";
