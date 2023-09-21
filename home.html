@@ -15,9 +15,17 @@
 
     <script type="module" src="menu.js"></script>
 
+    <script type="module" src="home.js"></script>
+
     <link rel="stylesheet" href="output.css">
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -28,7 +36,7 @@
 
   <main class="bg-white dark:bg-dark relative overflow-hidden">
 
-    <header class="hidden fixed max-lg:flex z-20 justify-between  w-full drop-shadow-md bg-white dark:bg-dark py-4 px-2">
+    <header class="lg:hidden fixed flex z-20 justify-between  w-full drop-shadow-md bg-white dark:bg-dark py-4 px-2">
   
       <a class="flex gap-4 items-center" href="index.html">
   
@@ -131,7 +139,7 @@
     </header>
   
     
-  <div class="flex h-screen group/menu overflow-hidden flex-col justify-between shadow-lg  bg-white dark:bg-dark w-24 hover:w-1/4 max-lg:hidden fixed left-0 z-10 ">
+  <div class="hidden h-screen group/menu overflow-hidden flex-col justify-between shadow-lg  bg-white dark:bg-dark w-24 hover:w-1/4 lg:flex fixed left-0 z-10 ">
   
     <div class="px-4 py-6">
   
@@ -369,14 +377,176 @@
     </div>
   </div>
   
-  <div class="bg-white dark:bg-dark h-screen w-full  flex items-center top-36 relative text-primary text-4xl flex-col -translate-y-10 gap-10  z-0">
+  <div class="bg-white dark:bg-dark h-screen w-full  flex overflow-y-auto relative text-primary text-4xl flex-col  gap-10 z-0 px-36 max-2xl:px-32 max-xl:px-24 max-lg:px-16 max-md:px-10 max-sm:px-4 py-20">
       
-      <img class="w-1/6 max-lg:w-1/3" src="https://ouch-cdn2.icons8.com/5mJh012Xhk6LqO9cznMAg_VIlkpff3Hw5PQ-Ri6vuPM/rs:fit:368:404/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNjI4/LzUzN2ZhNTM2LTgz/Y2QtNDBmZC1iMjRi/LWEyMDFkNmVlOTVl/Yi5wbmc.png" alt="">
-       
-      Bem-vindo 👋
+     <!-- Carrossel -->
+    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+      <!-- Carousel wrapper -->
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+          <!-- Item 1 -->
+          <div class="hidden duration-700 ease-in-out" data-carousel-item>
+
+            <!--Conteudo cadastrar produtos-->
+            <section
+            class="overflow-hidden bg-gray-50 dark:bg-gray-900 sm:grid sm:grid-cols-2 sm:items-center flex h-full"
+            >
+            <div class="p-8 md:p-12 lg:px-16 lg:py-24">
+              <div
+                class="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right -translate-y-10 max-lg:-translate-y-0"
+              >
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
+                  Adicione novos produtos!
+                </h2>
+
+                <p class="block text-gray-500 md:mt-4 max-md:hidden text-sm">
+                  Melhore sua gestão de produtos e não se enrole
+                </p>
+
+                <div class="mt-4 md:mt-8">
+                  <a
+                    href="produtos/cadastroProdutos.html"
+                    class="inline-block rounded bg-primary px-12 py-3 text-sm font-medium text-white transition hover:bg-primary/80 focus:outline-none focus:ring focus:ring-primary"
+                  >
+                    Cadastrar
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <img
+              alt="usuario"
+              src="https://ouch-cdn2.icons8.com/t7WzAb1U_ijD7d2eR2Y-DFry3ExUvNq76HoS8D4zCaA/rs:fit:368:352/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvMTQy/L2I4MjEyNGIyLTM2/OGItNDcwMy1hY2U3/LWMyOTc0YTk2OGI3/Mi5wbmc.png"
+              class="w-1/2 max-sm:hidden"
+            />
+            </section>
+
+           
+          </div>
+
+          <!-- Item 2 -->
+          <div class="hidden duration-700 ease-in-out" data-carousel-item>
+
+             <!--Conteudo cadastrar transaçoes-->
+            <section
+            class="overflow-hidden bg-gray-50 dark:bg-gray-900 sm:grid sm:grid-cols-2 sm:items-center flex h-full"
+            >
+            <div class="p-8 md:p-12 lg:px-16 lg:py-24">
+              <div
+                class="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right -translate-y-10 max-lg:-translate-y-0"
+              >
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
+                  Controle suas transações
+                </h2>
+
+                <p class="block text-gray-500 md:mt-4 max-md:hidden text-sm">
+                  Crie o hábito de registrar suas transações de estoque
+                </p>
+
+                <div class="mt-4 md:mt-8">
+                  <a
+                    href="produtos/pesquisarProdutos.html"
+                    class="inline-block rounded bg-primary px-12 py-3 text-sm font-medium text-white transition hover:bg-primary/80 focus:outline-none focus:ring focus:ring-primary"
+                  >
+                    Registrar
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <img
+              alt="usuario"
+              src="https://ouch-cdn2.icons8.com/lAIiLw_8IO35ASDPxYlrRb7Toyd30Ku8I_-zeVH777o/rs:fit:368:283/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNzU5/LzI3MGUwODU2LWQy/M2UtNDhhNS04OTNl/LWVjODZkZjNmNmY3/My5wbmc.png"
+              class="w-1/2 max-sm:hidden"
+            />
+            </section>
+
+          </div>
+
+          <!-- Item 3 -->
+          <div class="hidden duration-700 ease-in-out" data-carousel-item>
+
+              <!--Conteudo estatisticas-->
+            <section
+            class="overflow-hidden bg-gray-50 dark:bg-gray-900 sm:grid sm:grid-cols-2 sm:items-center flex h-full"
+            >
+            <div class="p-8 md:p-12 lg:px-16 lg:py-24">
+              <div
+                class="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right -translate-y-10 max-lg:-translate-y-0"
+              >
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
+                  Veja um relório completo 
+                </h2>
+
+                <p class="block text-gray-500 md:mt-4 max-md:hidden text-sm">
+                  Analise como está o desempenho do seu negócio
+                </p>
+
+                <div class="mt-4 md:mt-8">
+                  <a
+                    href="estatisticas/relatorio.html"
+                    class="inline-block rounded bg-primary px-12 py-3 text-sm font-medium text-white transition hover:bg-primary/80 focus:outline-none focus:ring focus:ring-primary"
+                  >
+                    Ver mais
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <img
+              alt="usuario"
+              src="https://ouch-cdn2.icons8.com/PkXpNdjYiDlT2zD1KZSK93sO6QBlZqvniD9y8k3pW-c/rs:fit:368:311/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvOTI2/L2FjMzc4ZjZiLWUx/ODEtNGYwNS1iZjUx/LTMwZGMxZDZlYTJm/My5wbmc.png"
+              class="w-1/2 max-sm:hidden"
+            />
+            </section>
+
+
+          </div>
+          
+      </div>
+      <!-- Slider indicators -->
+      <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+          <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+          <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+          <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+      </div>
+      <!-- Slider controls -->
+      <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+              </svg>
+              <span class="sr-only">Previous</span>
+          </span>
+      </button>
+      <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+              </svg>
+              <span class="sr-only">Next</span>
+          </span>
+      </button>
+    </div>
+
+    <!-- Produtos com estoque zerado -->
+
+    <div class="space-y-8 my-4">
+      <p class="text-2xl max-lg:text-lg max-md:text-sm font-medium text-yellow-400">Produtos com o estoque zerado ⚠️</p>
+
+      
+      <ul id="galeriaProdutosZerados" class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-2">
+
+
+
+        
+      </ul>
+
+
+    </div>
+
       
     
-    </div>
+</div>
   
       <!--------------------------------------------------->
   
@@ -384,7 +554,7 @@
       <!-- mobile -->
   
   
-  <div class="hidden fixed max-lg:block w-full bottom-0 shadow-md rounded-t-xl py-4 pb-6 bg-white/90 dark:bg-dark ">
+  <div class="block fixed lg:hidden w-full bottom-0 shadow-md rounded-t-xl py-4 pb-6 bg-white/90 dark:bg-dark ">
   
     <div class=" flex ">
   

@@ -361,7 +361,7 @@ function retornarIDUsuario() {
               id="objcardimg"
               src=${foto}
               alt=""
-              class="w-full  transition duration-500 group-hover:scale-105 " style="min-height:200px;"
+              class="w-full  transition duration-500 group-hover:scale-105 " style="min-height:230px;"
             />
 
             <div class="relative bg-white pt-3">

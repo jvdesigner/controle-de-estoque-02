@@ -182,6 +182,7 @@ async function TotaldeCusto(){
 
       document.getElementById('txtCustoTotal').textContent = "R$ " + valorTotal.toFixed(2) 
       document.getElementById('custo02').textContent = "R$ " + valorTotal.toFixed(2) 
+      document.getElementById('custo03').textContent = "R$ " + valorTotal.toFixed(2) 
      
 
 };
@@ -209,7 +210,8 @@ async function TotaldeLucro(){
       });
 
       document.getElementById('txtLucroTotal').textContent = "R$ " + valorTotal.toFixed(2) 
-      document.getElementById('lucro02').textContent = "R$ " + valorTotal.toFixed(2) 
+      document.getElementById('lucro02').textContent = "R$ " + valorTotal.toFixed(2)
+      document.getElementById('lucro04').textContent = "R$ " + valorTotal.toFixed(2) 
 
 
 };
@@ -638,7 +640,7 @@ function formatarGraficoTransacoesCategoria(){
                         const sum = w.globals.seriesTotals.reduce((a, b) => {
                           return a + b
                         }, 0)
-                        return `${sum.toFixed(2)}%`
+                        return `${100}%`
                       },
                     },
                     value: {
@@ -817,7 +819,7 @@ async function graficoCustoLucro(){
         xaxis: {
           categories: meses,
           labels: {
-            show: false,
+            show: true,
           },
           axisBorder: {
             show: false,
@@ -896,6 +898,7 @@ async function obterTop10ProdutosComMaiorLucro() {
 
 let vtop10Produtos
 let vvaloresLucroTop10
+
 // Uso da função
 await obterTop10ProdutosComMaiorLucro().then(([top10Produtos, valoresLucroTop10]) => {
   //console.log("Top 10 Produtos com Maior Lucro:", top10Produtos);
@@ -1006,7 +1009,164 @@ function graficoTop10Produtos(){
 
 graficoTop10Produtos();
 
+
+// TOP 10 PRODUTOS MENORES VENDAS
+
+async function obterTop10ProdutosComPioresLucros() {
+  const anoAtual = new Date().getFullYear();
+  const q = query(
+    docRefTran,
+    where("idUsuario", "==", vidUsuario),
+    where("subTipo", "==", "Venda"),
+    where('data', '>=', `${anoAtual}-01-01`), 
+    where('data', '<=', `${anoAtual}-12-31`)
+  );
+
+  const querySnapshot = await getDocs(q);
+
+  // Criar um objeto para rastrear o lucro por produto
+  const lucroPorProduto = {};
+
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    const produto = data.nome;
+    const lucro = data.total;
+
+    // Verificar se o produto já foi registrado
+    if (!lucroPorProduto[produto]) {
+      lucroPorProduto[produto] = 0;
+    }
+
+    // Adicionar o lucro ao produto
+    lucroPorProduto[produto] += lucro;
+  });
+
+  // Classificar os produtos com base no lucro em ordem crescente
+  const produtosOrdenados = Object.keys(lucroPorProduto).sort(
+    (produtoA, produtoB) => lucroPorProduto[produtoA] - lucroPorProduto[produtoB]
+  );
+
+  // Selecionar os 10 produtos com piores lucros
+  const piores10Produtos = produtosOrdenados.slice(0, 10);
+
+  // Obter os valores de lucro correspondentes
+  const valoresLucroPiores10 = piores10Produtos.map((produto) => parseFloat(lucroPorProduto[produto].toFixed(2)));
+
+  return [piores10Produtos, valoresLucroPiores10];
+}
+
+let vtop10Produtos2
+let vvaloresLucroTop102
+
+// Uso da função
+await obterTop10ProdutosComPioresLucros().then(([piores10Produtos, valoresLucroPiores10]) => {
+
+  vtop10Produtos2=piores10Produtos;
+  vvaloresLucroTop102=valoresLucroPiores10
+});
+
+function graficoTop10ProdutosPiores(){
+
+  var options = {
+      series: [
+      {
+          name: "Venda",
+          color: "#ff8080",
+          data: vvaloresLucroTop102,
+      }
+      ],
+      chart: {
+      sparkline: {
+          enabled: false,
+      },
+      type: "bar",
+      width: "100%",
+      height: 400,
+      toolbar: {
+          show: false,
+      }
+      },
+      fill: {
+      opacity: 1,
+      },
+      plotOptions: {
+      bar: {
+          horizontal: true,
+          columnWidth: "100%",
+          borderRadiusApplication: "end",
+          borderRadius: 6,
+          dataLabels: {
+          position: "top",
+          },
+      },
+      },
+      legend: {
+      show: true,
+      position: "bottom",
+      },
+      dataLabels: {
+      enabled: false,
+      },
+      tooltip: {
+      shared: true,
+      intersect: false,
+      formatter: function (value) {
+          return "R$" + value
+      }
+      },
+      xaxis: {
+      labels: {
+          show: true,
+          style: {
+          fontFamily: "Inter, sans-serif",
+          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400 '
+          },
+          formatter: function(value) {
+          return "R$" + value
+          }
+      },
+      categories: vtop10Produtos2,
+      axisTicks: {
+          show: false,
+      },
+      axisBorder: {
+          show: false,
+      },
+      },
+      yaxis: {
+      labels: {
+          show: true,
+          style: {
+          fontFamily: "Inter, sans-serif",
+          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400 translate-x-2'
+          }
+      }
+      },
+      grid: {
+      show: true,
+      strokeDashArray: 4,
+      padding: {
+          left: 2,
+          right: 2,
+          top: -20
+      },
+      },
+      fill: {
+      opacity: 1,
+      }
+  }
+
+  if(document.getElementById("bar-chart2") && typeof ApexCharts !== 'undefined') {
+      const chart = new ApexCharts(document.getElementById("bar-chart2"), options);
+      chart.render();
+  }
+
+
+
+}
+
+graficoTop10ProdutosPiores();
+
+
 // CARREGANDO
-
-
 document.getElementById('loading').style.display="none";
